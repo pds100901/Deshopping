@@ -171,3 +171,20 @@ export function armarRosterRecorrido(): AgenteOficina[] {
     tarea: TAREAS[rol] ?? 'Trabajando en su tarea.',
   }));
 }
+
+/** Lo que dice el panel de un agente que todavía no tiene encargos. */
+export const SIN_ENCARGOS = 'Sin encargos por ahora. Dale una orden y su trabajo llega a «Entregas».';
+
+/**
+ * Roster real de la oficina: los mismos 19, todos libres y sin tareas inventadas. Lo que hagan
+ * después sale de las órdenes que reciben y de sus entregas. El recorrido guiado usa
+ * `armarRosterRecorrido`, con estados de muestra.
+ */
+export function armarRosterReal(): AgenteOficina[] {
+  return armarRosterRecorrido().map((a) => ({
+    ...a,
+    estado: 'libre',
+    actividad: undefined,
+    tarea: SIN_ENCARGOS,
+  }));
+}

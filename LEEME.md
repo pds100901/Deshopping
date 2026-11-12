@@ -70,19 +70,47 @@ ya tienen hoja y la inicial de los demás.
 
 Los enlaces a los artefactos solo abren para quien tiene acceso a cada uno en claude.ai.
 
-Los agentes **no leen ni cambian los artefactos**: el enlace los abre en otra pestaña. Los nombres, las
-tareas y los estados de arriba son de ejemplo, no datos en vivo de la tienda.
+Los agentes **no leen ni cambian los artefactos**: el enlace los abre en otra pestaña.
+
+## Trabajo real: órdenes y entregas
+
+Los agentes hacen trabajo de verdad. Cada orden produce una **entrega**: un texto terminado escrito
+por un modelo de Claude con el carácter y el oficio del agente (un guion de reel, mensajes de WhatsApp
+listos para copiar, una promo completa, una lista de entregas…).
+
+1. Tocá a un agente (en la casa o desde **Equipo**) y dale una orden.
+2. El agente pasa a «Trabajando» y su entrega se va escribiendo en **Entregas** (arriba a la izquierda).
+3. Cuando termina queda «por revisar». **Oz aprueba todo lo del área de Contenido** (Brillitos, Gigi
+   Guion, Rolo Reel); lo demás lo aprueba Pau. Cada entrega dice quién la aprueba.
+4. Quien revisa puede **Aprobar**, **Pedir cambios** (el agente la rehace con tu nota) o **Rechazar**,
+   y **Copiar** el texto para usarlo.
+
+Dónde corre el modelo:
+
+- **En el artefacto de claude.ai** (el enlace del iPad): usa Claude con tu cuenta, sin clave. La
+  primera vez pide permiso. Las entregas se guardan en el artefacto y las ve quien tenga acceso,
+  desde cualquier dispositivo.
+- **En la computadora** (`npm run dev`): usa tu clave de `.env` (ver «Darle inteligencia») y las
+  entregas quedan en ese navegador.
+
+Límites, para que no haya sorpresas:
+
+- Los agentes **no leen** el catálogo, los pedidos ni WhatsApp, y **no envían ni publican** nada:
+  escriben el trabajo y vos lo usás. Trabajan con lo que dice la orden.
+- No inventan datos: donde falta uno dejan un espacio como `[precio]` y al final dicen qué les falta.
+- La app no comprueba quién toca «Aprobar»: muestra a quién le toca (Oz o Pau), pero no lo impide.
 
 ## Dónde ver qué hace cada agente
 
-- **Botón «Equipo»** (arriba a la izquierda): la lista de los 19 por área, con su estado y su tarea.
-  El número rosado dice cuántos esperan tu decisión. Tocar a uno lo enfoca en la casa y abre su panel.
-- **Tocar a un agente en la casa**: abre su panel con su estado, su tarea, su artefacto y el campo
-  para darle órdenes.
-- **Burbujas sobre la cabeza**: «…» trabajando, «!» esperando tu decisión.
+- **Botón «Entregas»**: el trabajo hecho y el que se está escribiendo. El número rosado dice cuántas
+  esperan revisión.
+- **Botón «Equipo»**: la lista de los 19 por área, con su estado y su último encargo. Tocar a uno lo
+  enfoca en la casa y abre su panel.
+- **Tocar a un agente en la casa**: su panel, con «Ver sus entregas» y el campo para darle órdenes.
+- **Burbujas sobre la cabeza**: «…» trabajando, «!» con una entrega esperando aprobación.
 
-Lo que muestran es de ejemplo y cambia con las órdenes que les das en la sesión: los agentes no hacen
-trabajo real ni leen los artefactos.
+Al abrir la oficina todos están libres y sin tareas inventadas; los estados de muestra solo aparecen
+durante el recorrido guiado.
 
 ## Controles
 
@@ -96,9 +124,8 @@ trabajo real ni leen los artefactos.
 
 1. Tocá a un agente: se abre su panel con su rol, su estado, su tarea y sus artefactos.
 2. Escribí una orden en «Dale una orden…» (Enter envía) o tocá una de las sugerencias.
-3. El agente responde y Jules confirma con una frase pregrabada.
-4. Clara Clic (Publicación) y Coco Caja (Ventas) nunca actúan solas: esperan **Aprobar** o
-   **Rechazar**. Lo mismo pasa con cualquier agente si la orden es delicada (borrar datos, pagar, enviar).
+3. El agente responde, Jules confirma con una frase pregrabada y la entrega llega a **Entregas**.
+4. Ninguna entrega se da por buena sola: todas esperan **Aprobar**, **Pedir cambios** o **Rechazar**.
 
 **Esc** cierra el panel.
 
@@ -135,8 +162,7 @@ Jules (`cerebro/`) y solo después al modelo:
 - **Habla como la marca**: español de Costa Rica con voseo, cálido y breve (`cerebro/personalidad/carta-generica.ts`
   y `servidor/orden.ts`).
 
-Lo que no hace: no recuerda nada entre una orden y otra, no se conecta a WhatsApp ni a los artefactos,
-y los agentes no ejecutan nada de verdad: responden y esperan tu decisión.
+Lo que no hace: no recuerda nada entre una orden y otra, y no se conecta a WhatsApp ni a los artefactos.
 
 ## Personalizar
 
@@ -145,6 +171,8 @@ y los agentes no ejecutan nada de verdad: responden y esperan tu decisión.
 | Nombres y personalidad de los personajes | `src/app/personajes.ts` |
 | Roles, tareas y estados de los agentes | `src/app/roster.ts` |
 | Artefacto de cada rol (enlaces) | `src/app/artefactos.ts` |
+| Qué entrega cada rol y cómo escribe (instrucciones al modelo) | `src/app/trabajo/encargo.ts` |
+| Quién aprueba cada área | `quienAprueba` en `src/app/trabajo/encargo.ts` |
 | Sugerencias y respuestas guardadas | `src/app/presentacion/ordenes.ts` |
 | Nombres y colores de las áreas | `src/oficina/render/layout.ts` y `src/oficina/mansion/plano.ts` |
 | Ropa de cada rol | `src/oficina/vestuario/roles.ts` |

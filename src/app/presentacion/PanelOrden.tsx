@@ -9,7 +9,7 @@ import { sugerenciasDe } from './ordenes';
 
 const TITULO: Record<EstadoAgente, string> = {
   trabajando: 'Trabajando',
-  esperando_decision: 'Espera tu decisión',
+  esperando_decision: 'Espera aprobación',
   libre: 'Libre',
 };
 
@@ -25,6 +25,8 @@ interface Props {
   onAprobar: () => void;
   onRechazar: () => void;
   onCerrar: () => void;
+  /** Abre la bandeja de entregas (el trabajo real del agente). */
+  onVerEntregas?: () => void;
   /** Texto del campo impuesto desde fuera (la demo escribe sola); `undefined` = lo escribe el usuario. */
   textoForzado?: string;
   /** Resalta «Aprobar» (la demo lo marca antes de que el cursor haga clic). */
@@ -41,6 +43,7 @@ export function PanelOrden({
   onAprobar,
   onRechazar,
   onCerrar,
+  onVerEntregas,
   textoForzado,
   resaltarAprobar = false,
 }: Props) {
@@ -93,6 +96,11 @@ export function PanelOrden({
             {respuesta}
           </p>
         )
+      )}
+      {onVerEntregas && (
+        <button type="button" className="btn ver-entregas" onClick={onVerEntregas}>
+          Ver sus entregas
+        </button>
       )}
       {aviso && <p className="aviso-local">{aviso}</p>}
       {agente.estado === 'esperando_decision' && (

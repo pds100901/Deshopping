@@ -6,7 +6,7 @@ import { fechaChileA } from '../hora';
 import { IndicadorAmbiente } from '../IndicadorAmbiente';
 import { Leyenda } from '../Leyenda';
 import { PanelEquipo } from '../PanelEquipo';
-import { armarRosterRecorrido } from '../roster';
+import { armarRosterReal, armarRosterRecorrido } from '../roster';
 import { palabrasDe } from './alineacion';
 import type { Alineacion } from './alineacion';
 import { GUION } from './guion';
@@ -39,6 +39,9 @@ import { CTA, ROTULO_FIJO, SUBTITULO } from './disposicion';
 import { TarjetasFlotantes } from './TarjetasFlotantes';
 import { RETRASO_SALUDO_MS, crearSfx } from './sonidos';
 import { accionDeTecla } from './teclas';
+import { BandejaEntregas } from '../trabajo/BandejaEntregas';
+import { useTrabajo } from '../trabajo/useTrabajo';
+import type { Novedad } from '../trabajo/useTrabajo';
 import '../estilos.css';
 
 const BASE = `${import.meta.env.BASE_URL}presentacion/`.replace(/\/{2,}/g, '/');
@@ -60,6 +63,9 @@ const OCULTAR_PAUSA_MS = 2000;
 /** Cuánto se queda el rótulo de sala al entrar a un ambiente. */
 const ROTULO_SALA_MS = 3500;
 const AVISO_GRABACION_MS = 1000;
+/** La oficina corre dentro de un artefacto de claude.ai (ahí el modelo es `sample`, sin servidor local). */
+const EN_ARTEFACTO = typeof window !== 'undefined' && 'claude' in window;
+const ALIVIO_ENTREGA = 'Gracias. Queda aprobada.';
 const TEXTO_CTA = 'Pedí por WhatsApp · De Shopping con Pau 🛍️';
 
 const sinMovimiento = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -119,7 +125,8 @@ const igualDemo = (a: EstadoDemo, b: EstadoDemo) =>
  * (antes de empezar) y `H` el modo grabación.
  */
 export function Presentacion() {
-  const [agentes, setAgentes] = useState(armarRosterRecorrido);
+  // Antes y después del recorrido la oficina es la de verdad: sin tareas de muestra.
+  const [agentes, setAgentes] = useState(armarRosterReal);
   const [seleccionadoId, setSeleccionadoId] = useState<string | null>(null);
   const [respuestas, setRespuestas] = useState<Record<string, string>>({});
   const [toast, setToast] = useState<string | null>(null);
@@ -566,7 +573,8 @@ export function Presentacion() {
   const demoVista = useRef(demoEstado);
   demoVista.current = demoEstado;
   useEffect(() => {
-    if (fase === 'libre' && !falloAudio) setAgentes((prev) => agentesDemo(prev, demoVista.current));
+    // Termina el recorrido (con sus estados de muestra) y vuelve la oficina real.
+    if (fase === 'libre' && !falloAudio) setAgentes(armarRosterReal());
   }, [fase, falloAudio]);
 
   // El envío de la orden de Nico suena igual que una orden dada a mano.
@@ -643,6 +651,57 @@ export function Presentacion() {
     });
   };
 
+  /** Lo que le pasa a un agente por su entrega se ve en la casa: su estado, su tarea y su frase. */
+  const alNovedad = (agenteId: string, novedad: Novedad) => {
+    const cambio: Record<Novedad['tipo'], [Agente['estado'], Agente['actividad'], string, string]> = {
+      escribiendo: ['trabajando', 'escribiendo', novedad.orden, 'Voy. Te dejo la entrega en la bandeja.'],
+      lista: [
+        'esperando_decision',
+        'pensando',
+        `Entrega lista: «${novedad.orden}». Espera el visto bueno de ${'aprueba' in novedad ? novedad.aprueba : 'Pau'}.`,
+        'Listo. Te dejé la entrega en la bandeja.',
+      ],
+      aprobada: ['libre', undefined, `Entrega aprobada: «${novedad.orden}».`, ALIVIO_ENTREGA],
+      rechazada: ['libre', undefined, `Entrega rechazada: «${novedad.orden}».`, 'Entendido. La descarto.'],
+      fallo: ['libre', undefined, `No pude entregar: «${novedad.orden}».`, 'No pude terminar. Mirá la bandeja.'],
+    };
+    const [estado, actividad, tarea, frase] = cambio[novedad.tipo];
+    setAgentes((prev) => prev.map((a) => (a.id === agenteId ? { ...a, estado, actividad, tarea } : a)));
+    setRespuestas((prev) => ({ ...prev, [agenteId]: frase }));
+  };
+  const trabajo = useTrabajo(alNovedad);
+  const [bandejaAbierta, setBandejaAbierta] = useState(false);
+  const pendienteDe = (agenteId: string) =>
+    trabajo.entregas.find((e) => e.agenteId === agenteId && e.estado === 'por_revisar');
+
+  // Quien tiene una entrega por revisar aparece esperando, también al volver a abrir la oficina
+  // o al terminar el recorrido. No toca a quien está escribiendo una nueva versión.
+  const { entregas, enCurso } = trabajo;
+  const escribiendo = useRef(new Set<string>());
+  escribiendo.current = new Set(enCurso.filter((c) => !c.fallo).map((c) => c.agenteId));
+  useEffect(() => {
+    if (fase === 'guiado') return;
+    const esperan = new Map(
+      entregas.filter((e) => e.estado === 'por_revisar').map((e) => [e.agenteId, e]),
+    );
+    if (esperan.size === 0) return;
+    setAgentes((prev) => {
+      let cambio = false;
+      const siguiente = prev.map((a) => {
+        const e = esperan.get(a.id);
+        if (!e || a.estado === 'esperando_decision' || escribiendo.current.has(a.id)) return a;
+        cambio = true;
+        return {
+          ...a,
+          estado: 'esperando_decision' as const,
+          actividad: 'pensando' as const,
+          tarea: `Entrega lista: «${e.orden}». Espera el visto bueno de ${e.aprueba}.`,
+        };
+      });
+      return cambio ? siguiente : prev;
+    });
+  }, [entregas, fase]);
+
   const darOrden = (texto: string) => {
     if (!seleccionado) return;
     const nuevo = ordenar(seleccionado, texto);
@@ -650,7 +709,10 @@ export function Presentacion() {
     prepararAudio();
     sfx.sonar('orden');
     actualizar(seleccionado.id, nuevo, respuestaDe(seleccionado.rol, ordenes.current++));
-    pedirAlModelo(seleccionado, texto);
+    // El trabajo de verdad: la entrega llega a la bandeja. La frase corta del modelo solo se
+    // pide en la computadora (en el artefacto no hay servidor local).
+    if (!EN_ARTEFACTO) pedirAlModelo(seleccionado, texto);
+    trabajo.encargar(seleccionado, texto);
     const clip = elegirClip(clips, ultimoClip.current, Math.random, seleccionado.rol);
     if (clip) {
       ultimoClip.current = clip.archivo;
@@ -661,6 +723,13 @@ export function Presentacion() {
 
   const resolver = (transicion: typeof aprobar) => {
     if (!seleccionado) return;
+    // Si hay una entrega esperando, aprobar o rechazar al agente es aprobar o rechazar su entrega.
+    const pendiente = pendienteDe(seleccionado.id);
+    if (pendiente) {
+      if (transicion === aprobar) trabajo.aprobar(pendiente);
+      else trabajo.rechazar(pendiente);
+      return;
+    }
     invalidarPeticiones();
     const { agente, frase } = transicion(seleccionado);
     actualizar(seleccionado.id, agente, frase);
@@ -779,6 +848,21 @@ export function Presentacion() {
               onSeleccionar={alSeleccionar}
             />
           )}
+          {!grabando && (
+            <BandejaEntregas
+              entregas={trabajo.entregas}
+              enCurso={trabajo.enCurso}
+              compartido={trabajo.compartido}
+              abierta={bandejaAbierta}
+              onAbrir={setBandejaAbierta}
+              onAprobar={trabajo.aprobar}
+              onRechazar={trabajo.rechazar}
+              onCambios={trabajo.pedirCambios}
+              onBorrar={trabajo.borrar}
+              onReintentar={trabajo.reintentar}
+              onDescartar={trabajo.descartar}
+            />
+          )}
           <IndicadorAmbiente
             ambienteId={ambienteLibre}
             onSalir={() => setAmbienteLibre(null)}
@@ -799,6 +883,7 @@ export function Presentacion() {
               onAprobar={() => resolver(aprobar)}
               onRechazar={() => resolver(rechazar)}
               onCerrar={() => setSeleccionadoId(null)}
+              onVerEntregas={() => setBandejaAbierta(true)}
             />
           )}
         </>

@@ -7,7 +7,7 @@ export function Leyenda() {
       </span>
       <span>
         <i className="barra-espera" />
-        Espera tu decisión
+        Espera aprobación
       </span>
       <span>
         <i className="barra-libre" />

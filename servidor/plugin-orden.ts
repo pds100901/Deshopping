@@ -1,6 +1,13 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { loadEnv, type Connect, type Plugin } from 'vite';
-import { crearLimitador, responderOrden, type EntornoOrden, type Limitador } from './orden';
+import {
+  crearLimitador,
+  responderOrden,
+  type DepsOrden,
+  type EntornoOrden,
+  type Limitador,
+} from './orden';
+import { responderTrabajo } from './trabajo';
 
 /**
  * Plugin de Vite que monta `POST /api/orden` en `vite` (desarrollo) y `vite preview`.
@@ -10,7 +17,8 @@ import { crearLimitador, responderOrden, type EntornoOrden, type Limitador } fro
  */
 
 export const RUTA_ORDEN = '/api/orden';
-const MAX_CUERPO = 4 * 1024;
+export const RUTA_TRABAJO = '/api/trabajo';
+const MAX_CUERPO = 16 * 1024;
 const IPS_LOOPBACK = new Set(['127.0.0.1', '::1', '::ffff:127.0.0.1']);
 const HOSTS_LOCALES = new Set(['localhost', '127.0.0.1', '[::1]']);
 
@@ -77,7 +85,10 @@ async function leerCuerpo(req: IncomingMessage): Promise<string | null> {
 }
 
 /** Manejador de `POST /api/orden`, separado del plugin para probarlo sin Vite. */
-export function crearManejadorOrden(deps: DepsManejador) {
+export function crearManejadorOrden(
+  deps: DepsManejador,
+  atender: (entrada: unknown, d: DepsOrden) => Promise<{ status: number; cuerpo: unknown }> = responderOrden,
+) {
   return async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
     try {
       if (!esLocal(req)) return responder(res, 403, { error: 'solo desde este equipo' });
@@ -100,7 +111,7 @@ export function crearManejadorOrden(deps: DepsManejador) {
       } catch {
         return responder(res, 400, { error: 'JSON inválido' });
       }
-      const { status, cuerpo } = await responderOrden(entrada, {
+      const { status, cuerpo } = await atender(entrada, {
         env: deps.entorno(),
         fetch: deps.fetch,
         limitador: deps.limitador,
@@ -123,13 +134,20 @@ interface ConMiddlewares {
 
 export function pluginOrden(): Plugin {
   let entorno: EntornoOrden = {};
+  const limitador = crearLimitador();
   const atender = crearManejadorOrden({
     entorno: () => entorno,
     fetch: (...args) => globalThis.fetch(...args),
-    limitador: crearLimitador(),
+    limitador,
   });
+  // Las entregas comparten el tope de uso con las órdenes.
+  const atenderTrabajo = crearManejadorOrden(
+    { entorno: () => entorno, fetch: (...args) => globalThis.fetch(...args), limitador },
+    responderTrabajo,
+  );
   const montar = ({ middlewares }: ConMiddlewares) => {
     middlewares.use(RUTA_ORDEN, (req, res) => void atender(req, res));
+    middlewares.use(RUTA_TRABAJO, (req, res) => void atenderTrabajo(req, res));
   };
   return {
     name: 'jules-orden',

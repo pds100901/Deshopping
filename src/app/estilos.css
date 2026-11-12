@@ -1617,3 +1617,133 @@ p {
 .fila-tarea {
   color: var(--fg);
 }
+
+/* «Entregas»: el trabajo real de los agentes, para aprobar. */
+.btn-entregas {
+  left: calc(var(--izq) + 150px);
+}
+
+.panel-entregas {
+  width: min(560px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.entrega {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.entrega-por_revisar,
+.entrega-en-curso {
+  border-color: #f9b4d1;
+}
+
+.entrega header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.entrega header > div {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.entrega header small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sello {
+  flex: none;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #ffdcea;
+  color: #c2256f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.entrega-aprobada .sello {
+  background: #e6f0de;
+  color: var(--teal);
+}
+
+.entrega-rechazada .sello {
+  background: #f1e9ec;
+  color: var(--muted);
+}
+
+.entrega-orden {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.entrega-texto {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff8fb;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.entrega-fallo {
+  margin: 0;
+  color: var(--bad);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.entrega .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.presentacion .entrega .btn {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 15px;
+  border-radius: 12px;
+  flex: none;
+}
+
+.entrega-cambios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entrega-cambios textarea {
+  min-height: 72px;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--fg);
+  font: inherit;
+  font-size: 15px;
+  resize: vertical;
+}
+
+.panel-entregas .nota {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}

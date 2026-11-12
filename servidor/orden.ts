@@ -21,9 +21,9 @@ import {
  */
 
 export const URL_ANTHROPIC = 'https://api.anthropic.com/v1/messages';
-const VERSION_API = '2023-06-01';
+export const VERSION_API = '2023-06-01';
 /** Configurable con `ANTHROPIC_MODEL`: sin clave no hay forma de comprobar el id sin gastar. */
-const MODELO_POR_DEFECTO = 'claude-haiku-5-5';
+export const MODELO_POR_DEFECTO = 'claude-haiku-5-5';
 const MAX_TOKENS = 160;
 const TIMEOUT_MS = 15_000;
 export const MAX_RESPUESTA = 240;
@@ -232,7 +232,7 @@ function recortar(texto: string): string {
   return `${(espacio > 0 ? corte.slice(0, espacio) : corte).trimEnd()}…`;
 }
 
-function textoDe(cuerpo: unknown): string | null {
+export function textoDe(cuerpo: unknown): string | null {
   if (typeof cuerpo !== 'object' || cuerpo === null) return null;
   const { content } = cuerpo as { content?: unknown };
   if (!Array.isArray(content)) return null;
