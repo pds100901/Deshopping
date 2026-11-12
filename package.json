@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && tsc -p tsconfig.servidor.json --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test artefactos/pedidos-de-clientes/cobros.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.9",
