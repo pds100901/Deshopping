@@ -1,0 +1,27 @@
+/** Cerebro de Jules del regalo: el índice del paquete en lista blanca. */
+export type * from './tipos';
+export type * from './memoria/tipos';
+export { UMBRALES_POR_DEFECTO, resolverUmbrales } from './umbrales';
+export { decidir, contextoPorDefecto } from './decision/decidir';
+export { clasificarIntencion, normalizar } from './decision/clasificar';
+export { emparejarPorTokens } from './decision/emparejar';
+export { nivelDeClase, evaluarRiesgo } from './decision/riesgo';
+export { factorExigido, factorPresente, siFaltaFactor } from './decision/factores';
+export { canonicalizar, hashCanonico, crearSolicitudDeAprobacion, solicitudVigente, } from './decision/aprobacion';
+export { detectarInyeccion, validarLecturaEnCuarentena, crearTicket, decidirSobreTicket, redactarInforme, } from './decision/cuarentena';
+export { equipoPorDefecto, crearTrabajo, PROCEDENCIA_PRINCIPAL } from './decision/delegar';
+export { CARTA_IDENTIDAD } from './personalidad/carta';
+export { CARTA_GENERICA } from './personalidad/carta-generica';
+export { registroPara } from './personalidad/registro';
+export { construirPromptJules, construirPromptFijo, construirPromptVariable, } from './personalidad/prompt';
+export { verificar, verificarUna } from './personalidad/verificadores';
+export { detectarPatrones } from './evolucion/patrones';
+export { evaluarCicloDeVida } from './evolucion/ciclo-de-vida';
+export { frescuraCumplida } from './evolucion/frescura';
+export { decidirSobrePropuesta, activarSolas } from './evolucion/propuestas';
+export { validarReceta, hashDeReceta } from './evolucion/receta';
+export { calcularMetricas } from './evolucion/metricas';
+export { PERFILES_GENERALES, PERFILES_DE_ROL, buscarPerfil, armarEquipo, } from './perfiles/perfiles';
+export { CIENTIFICO, AREAS_DEL_CIENTIFICO, temasVigilados, validarBoletin, colaDeInvestigacion, } from './perfiles/cientifico';
+export { CADUCIDAD_DIAS, proponerHecho, confirmarHecho, rechazarHecho, caducar, baseParaActuar, } from './memoria/hechos';
+export { hechosRelevantes, consultar, preferencia, seccionDeMemoriaParaPrompt, } from './memoria/consultar';
