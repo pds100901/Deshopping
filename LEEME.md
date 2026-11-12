@@ -1,6 +1,6 @@
 # La oficina de De Shopping con Pau
 
-Una oficina en 3D con los 19 agentes de IA que ayudan a llevar **De Shopping con Pau**: catálogo,
+Una oficina en 3D con los 19 personajes (agentes de IA) que ayudan a llevar **De Shopping con Pau**: catálogo,
 pedidos, compras en SHEIN y Temu, contenido, finanzas y agenda. Jules, la mano derecha de Pau, reparte
 el trabajo. Cada agente abre el artefacto de claude.ai con el que trabaja.
 
@@ -22,7 +22,7 @@ npm run dev
 Abrí `http://127.0.0.1:5180` en el navegador. Si ese puerto está ocupado, Vite muestra otro en la terminal.
 
 1. Antes de empezar podés explorar: tocá agentes, dales órdenes y mové la cámara. Elegí la hora del día con **1** (atardecer), **2** (noche) o **3** (día, la inicial).
-2. Tocá **Empezar** para el recorrido guiado. La cámara entra a cada área y enfoca a cada agente por su nombre; un cursor animado abre los paneles de Camila, Renata, Valentina y Sofi.
+2. Tocá **Empezar** para el recorrido guiado. La cámara entra a cada área y enfoca a cada agente por su nombre; un cursor animado abre los paneles de Vicky Vitrina, Clara Clic, Gigi Guion y Coco Caja.
 3. Con la **barra espaciadora** (o el botón de abajo a la derecha) pausás y reanudás.
 4. Al final te entrega la cámara. Con la tecla **R** volvés a empezar.
 
@@ -38,27 +38,34 @@ siempre con sus frases guardadas (ver «Darle inteligencia»).
 
 ## El equipo
 
-| Área (lugar en la casa) | Agente | Rol | Artefacto que abre |
+Siete personajes vienen de las hojas «Agentes de Claude» de Pau (marcados con ★); los otros doce se
+crearon con el mismo estilo. Las fichas completas están en `docs/personajes.md`.
+
+| Área (lugar en la casa) | Personaje | Rol | Artefacto que abre |
 | --- | --- | --- | --- |
-| Tienda en línea (piso 3) | Camila | Catálogo | Disponible ahora |
-| | Daniela | Inventario | Disponible ahora |
-| | Mariana | Regalos | Armá tu regalo |
-| | Renata | Publicadora (pide aprobación) | Disponible ahora |
-| Pedidos (piso 2) | Sofi | Atención por WhatsApp (pide aprobación) | Pedidos de clientes |
-| | Andrea | Pedidos de clientes | Pedidos de clientes |
-| | Fernanda | Cotizaciones | Cotizador |
-| Contenido (piso 3) | Valentina | Guionista | Banco de contenido |
-| | Gabi | Editora de video | Videos «Cómo pedir» y «Cómo usar tu catálogo» |
-| | Isa | Diseñadora | Plantillas, Brand Kit, Manual de marca |
-| Finanzas (piso 2) | Doña Marta | Contadora | — |
-| | Paola | Promociones | Códigos de descuento |
-| | Karla | Cobros | Pedidos de clientes |
-| Agenda y viajes (piso 1) | Jime | Asistente personal | Agenda de Pau |
-| | Nati | Viajes | Agenda de Pau |
-| | Meli | Entregas | Pedidos de clientes |
-| Compras (torre) | Lucía | Compras SHEIN | Pedidos SHEIN |
-| | Carol | Compras Temu | Pedidos Temu |
-| | Ximena | Cazadora de ofertas | Pedidos SHEIN, Pedidos Temu |
+| Tienda en línea (piso 3) | Vicky Vitrina | Catálogo | Disponible ahora |
+| | Rafa Repisa ★ | Bodega | Disponible ahora |
+| | Lola Lazo | Regalos | Armá tu regalo |
+| | Clara Clic | Publicación (pide aprobación) | Disponible ahora |
+| Pedidos (piso 2) | Coco Caja ★ | Ventas (pide aprobación) | Pedidos de clientes |
+| | Nati Nota | Pedidos | Pedidos de clientes |
+| | Pepe Precio | Cotizaciones | Cotizador |
+| Contenido (piso 3) | Brillitos ★ | Diseño y contenido | Plantillas, Brand Kit, Manual de marca |
+| | Gigi Guion | Guiones | Banco de contenido |
+| | Rolo Reel | Video | Videos «Cómo pedir» y «Cómo usar tu catálogo» |
+| Finanzas (piso 2) | Grace Gráfica ★ | Reportes y estadísticas | Pedidos de clientes |
+| | Don Colón ★ | Cobros | Pedidos de clientes |
+| | Coni Cupón | Promociones | Códigos de descuento |
+| Agenda y viajes (piso 1) | Rita Ruta ★ | Entregas | Pedidos de clientes |
+| | Ana Agenda | Agenda | Agenda de Pau |
+| | Beto Boleto | Viajes | Agenda de Pau |
+| Compras (torre) | Vale Maleta ★ | Compras | Pedidos SHEIN, Pedidos Temu |
+| | Cari Carrito | Carritos | Pedidos SHEIN, Pedidos Temu |
+| | Olga Oferta | Ofertas | Códigos de descuento |
+
+En la escena cada uno es un muñeco de bloques con los colores, el peinado y los accesorios de su hoja
+(una versión simplificada, no la ilustración). El panel muestra el retrato ilustrado de los siete que
+ya tienen hoja y la inicial de los demás.
 
 Los enlaces a los artefactos solo abren para quien tiene acceso a cada uno en claude.ai.
 
@@ -78,7 +85,7 @@ tareas y los estados de arriba son de ejemplo, no datos en vivo de la tienda.
 1. Tocá a un agente: se abre su panel con su rol, su estado, su tarea y sus artefactos.
 2. Escribí una orden en «Dale una orden…» (Enter envía) o tocá una de las sugerencias.
 3. El agente responde y Jules confirma con una frase pregrabada.
-4. Renata (Publicadora) y Sofi (Atención por WhatsApp) nunca actúan solas: esperan **Aprobar** o
+4. Clara Clic (Publicación) y Coco Caja (Ventas) nunca actúan solas: esperan **Aprobar** o
    **Rechazar**. Lo mismo pasa con cualquier agente si la orden es delicada (borrar datos, pagar, enviar).
 
 **Esc** cierra el panel.
@@ -123,7 +130,8 @@ y los agentes no ejecutan nada de verdad: responden y esperan tu decisión.
 
 | Qué | Dónde |
 | --- | --- |
-| Nombres, roles, tareas y estados de los agentes | `src/app/roster.ts` |
+| Nombres y personalidad de los personajes | `src/app/personajes.ts` |
+| Roles, tareas y estados de los agentes | `src/app/roster.ts` |
 | Artefacto de cada rol (enlaces) | `src/app/artefactos.ts` |
 | Sugerencias y respuestas guardadas | `src/app/presentacion/ordenes.ts` |
 | Nombres y colores de las áreas | `src/oficina/render/layout.ts` y `src/oficina/mansion/plano.ts` |
@@ -133,7 +141,7 @@ y los agentes no ejecutan nada de verdad: responden y esperan tu decisión.
 | Qué hace la cámara en cada frase | `src/app/presentacion/guion.ts` |
 
 Si cambiás el guion, corré `node herramientas/generar-recorrido.mjs` para rehacer los tiempos. Las frases
-que `guion.ts` usa como ancla (por ejemplo «Camila» o «si la toco») tienen que seguir en el texto.
+que `guion.ts` usa como ancla (por ejemplo «Vicky» o «si la toco») tienen que seguir en el texto.
 
 ## Ponerle voz al recorrido
 

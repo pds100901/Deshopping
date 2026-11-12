@@ -20,43 +20,47 @@ const SUGERENCIAS: Record<string, string[]> = {
     'Revisá los precios del catálogo',
     'Mostrame lo más nuevo',
   ],
-  Inventario: ['Marcá lo agotado', 'Decime qué queda poquito', 'Contá las existencias de nuevo'],
+  Bodega: ['Marcá lo agotado', 'Decime qué queda poquito', 'Contá las existencias de nuevo'],
   Regalos: [
     'Proponé tres regalos de menos de ₡15 000',
     'Armá un regalo para amiga secreta',
     'Revisá «Armá tu regalo»',
   ],
-  Publicadora: ['Publicá los cambios del catálogo', 'Esperá hasta mañana', 'Resumí qué cambió'],
-  'Atención por WhatsApp': [
+  Publicación: ['Publicá los cambios del catálogo', 'Esperá hasta mañana', 'Resumí qué cambió'],
+  Ventas: [
     'Avisales que su pedido ya llegó',
     'Hacé el tono más cercano',
-    'Respondé las consultas de hoy',
+    'Respondé las consultas de WhatsApp',
   ],
-  'Pedidos de clientes': [
+  Pedidos: [
     'Pasá los encargos nuevos a la lista',
     'Decime qué pedidos van atrasados',
     'Armá el resumen de la semana',
   ],
   Cotizaciones: ['Cotizá este encargo', 'Revisá el tipo de cambio', 'Prepará tres cotizaciones'],
-  Guionista: [
+  Guiones: [
     'Escribí el gancho del próximo reel',
     'Resumí el guion en tres líneas',
     'Proponé cinco ideas para historias',
   ],
-  'Editora de video': ['Cortá el silencio del inicio', 'Agregá subtítulos', 'Exportá en vertical'],
-  Diseñadora: [
+  Video: ['Cortá el silencio del inicio', 'Agregá subtítulos', 'Exportá en vertical'],
+  'Diseño y contenido': [
     'Armá la historia de «ya llegó»',
     'Usá los colores de la marca',
     'Prepará tres versiones',
   ],
-  Contadora: ['Cerrá el mes', 'Decime cuánto gané esta semana', 'Revisá los gastos de envío'],
+  'Reportes y estadísticas': [
+    'Armá el reporte de la semana',
+    'Decime qué se vendió más',
+    'Compará este mes con el anterior',
+  ],
   Promociones: [
     'Creá un código para el fin de semana',
     'Decime qué códigos vencen pronto',
     'Proponé una promo de temporada',
   ],
   Cobros: ['Recordá los saldos pendientes', 'Prepará un aviso amable', 'Listá quién debe adelanto'],
-  'Asistente personal': [
+  Agenda: [
     'Ordená mi agenda de mañana',
     'Pasá la entrega para la tarde',
     'Recordame cerrar los pedidos',
@@ -67,17 +71,17 @@ const SUGERENCIAS: Record<string, string[]> = {
     'Anotá este encargo para el viaje',
   ],
   Entregas: ['Organizá las entregas de la semana', 'Agrupá por zona', 'Decime qué falta empacar'],
-  'Compras SHEIN': [
-    'Armá el carrito de la semana',
+  Compras: [
+    'Armá la lista de compras de la semana',
+    'Buscá esto en SHEIN y en Temu',
+    'Decime cuánto suma el pedido',
+  ],
+  Carritos: [
+    'Armá el carrito de SHEIN',
+    'Armá el carrito de Temu',
     'Revisá tallas y colores',
-    'Decime cuánto suma el pedido',
   ],
-  'Compras Temu': [
-    'Armá el carrito de la semana',
-    'Revisá qué llegó incompleto',
-    'Decime cuánto suma el pedido',
-  ],
-  'Cazadora de ofertas': [
+  Ofertas: [
     'Buscá cupones para este pedido',
     'Avisame de ofertas nuevas',
     'Compará precios entre tiendas',
@@ -91,7 +95,7 @@ const RESPUESTAS: Record<string, string[]> = {
     'Listo, ya se ve en el catálogo.',
     'Foto, precio y descripción: voy.',
   ],
-  Inventario: [
+  Bodega: [
     'Anotado. Cuento dos veces, por si acaso.',
     'Voy, pieza por pieza.',
     'Ya lo estoy revisando.',
@@ -101,17 +105,17 @@ const RESPUESTAS: Record<string, string[]> = {
     'Voy a armar algo que enamore.',
     'Listo, con moñito y todo.',
   ],
-  Publicadora: [
+  Publicación: [
     'Entendido. Lo dejo listo, pero no publico nada sin tu aprobación.',
     'Preparado. Espero tu permiso para continuar.',
     'Todo en orden de mi lado. Vos das la señal.',
   ],
-  'Atención por WhatsApp': [
+  Ventas: [
     'Perfecto. Los mensajes están listos, esperan tu visto bueno.',
     'Lo ajusto. Nada sale hasta que aprobés.',
     'Hecho. Decime cuándo y los envío.',
   ],
-  'Pedidos de clientes': [
+  Pedidos: [
     'Anotado, ningún encargo se me pierde.',
     'Ya los paso a la lista.',
     'Dame un momento y te lo cuento claro.',
@@ -121,20 +125,20 @@ const RESPUESTAS: Record<string, string[]> = {
     'Va, con envío incluido.',
     'Tengo el primer número. Ya sigo.',
   ],
-  Guionista: [
+  Guiones: [
     'Ya tengo el gancho en la cabeza.',
     'Escena uno, a escribir.',
     'Dame cinco minutos y tenés guion.',
   ],
-  'Editora de video': ['Exportando. Cafecito incluido.', 'Corte limpio, ya mismo.', 'Va a la línea de tiempo.'],
-  Diseñadora: [
+  Video: ['Exportando. Cafecito incluido.', 'Corte limpio, ya mismo.', 'Va a la línea de tiempo.'],
+  'Diseño y contenido': [
     'Rosado, verde y a brillar.',
     'Lo armo con las plantillas de la marca.',
     'Listo, y quedó divino.',
   ],
-  Contadora: [
-    'Cuadrando los números, como siempre.',
-    'Anotado. Todo con respaldo.',
+  'Reportes y estadísticas': [
+    'Los datos ya dicen algo interesante.',
+    'Gráfico en camino, clarito.',
     'Lo reviso y te lo dejo en orden.',
   ],
   Promociones: [
@@ -143,7 +147,7 @@ const RESPUESTAS: Record<string, string[]> = {
     'Entendido, armo la propuesta.',
   ],
   Cobros: ['Con tacto y con fecha.', 'Lo preparo amable pero firme.', 'Anotado, nadie se me escapa.'],
-  'Asistente personal': [
+  Agenda: [
     'Tu agenda queda ordenada.',
     'Hecho, y con recordatorio.',
     'Ya lo muevo, vos tranquila.',
@@ -154,13 +158,13 @@ const RESPUESTAS: Record<string, string[]> = {
     'Las ordeno por zona.',
     'Anotado, todo sale a tiempo.',
   ],
-  'Compras SHEIN': [
-    'Carrito en marcha.',
-    'Reviso tallas antes de pedir.',
+  Compras: [
+    'Maleta lista, voy de compras.',
+    'Comparo antes de llevar.',
     'No compro nada sin que lo veás.',
   ],
-  'Compras Temu': ['Carrito en marcha.', 'Ya lo estoy revisando.', 'Nada se me pasa.'],
-  'Cazadora de ofertas': [
+  Carritos: ['Carrito en marcha.', 'Reviso tallas antes de pedir.', 'Nada se me pasa.'],
+  Ofertas: [
     'Si hay cupón, lo encuentro.',
     'Ya estoy buscando.',
     'Comparo antes de recomendar.',
@@ -171,8 +175,8 @@ const RESPUESTAS_GENERICAS = ['Anotado, me pongo en eso.', 'Va, ya empiezo.', 'E
 
 /** Alivio al aprobar, por rol. */
 const ALIVIO: Record<string, string> = {
-  Publicadora: 'Gracias. Publico ahora y respiro tranquila.',
-  'Atención por WhatsApp': 'Por fin. Envío los mensajes ahora.',
+  Publicación: 'Gracias. Publico ahora y respiro tranquila.',
+  Ventas: 'Por fin. Envío los mensajes ahora.',
 };
 const ALIVIO_GENERICO = 'Gracias. Me pongo en marcha.';
 const RECHAZO = 'Entendido. Lo dejo en pausa.';

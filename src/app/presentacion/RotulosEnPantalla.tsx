@@ -60,12 +60,12 @@ export function RotuloDeAgente({ rotulo }: { rotulo: RotuloAgente | null }) {
   );
 }
 
-/** Rótulo fijo de todo el video, arriba al centro: el choque «19 ayudantes / 0 humanas». */
+/** Rótulo fijo de todo el video, arriba al centro: el choque «19 ayudantes / 0 humanos». */
 export function RotuloFijo() {
   return (
     <div className="pres-fijo" role="note">
       <b>
-        19 ayudantes / <i>0</i> humanas
+        19 ayudantes / <i>0</i> humanos
       </b>
       <span>La oficina de De Shopping con Pau</span>
     </div>

@@ -28,11 +28,12 @@ export interface Demo {
 
 export const ORDEN_NICO = 'Avisales que su pedido ya llegó';
 export const RESPUESTA_NICO = 'Hecho. Empiezo ahora mismo.';
-export const TAREA_VALENTINA = 'Guion del reel: «Tengo diecinueve ayudantes y ninguna es humana…»';
+export const TAREA_VALENTINA = 'Guion del reel: «Tengo diecinueve ayudantes y ninguno es humano…»';
 
 /**
- * Los nombres internos vienen del guion original: «tomas» es Camila (Catálogo), «bruno» es
- * Renata (Publicadora), «valentina» es Valentina (Guionista) y «nico» es Sofi (WhatsApp).
+ * Los nombres internos vienen del guion original: «tomas» es Vicky Vitrina
+ * (Catálogo), «bruno» es Clara Clic (Publicación), «valentina» es Gigi Guion (Guiones) y «nico»
+ * es Coco Caja (Ventas).
  */
 const VIAJE = 0.9;
 /** Duración del pulso del clic y cuánto se queda el cursor después de él. */
@@ -42,9 +43,9 @@ const ESCRIBE_DESPUES = 0.4;
 const ESCRIBE_MAX = 1.5;
 
 const TOMAS = '0:Catálogo';
-const BRUNO = '0:Publicadora';
-const VALENTINA = '2:Guionista';
-const NICO = '1:Atención por WhatsApp';
+const BRUNO = '0:Publicación';
+const VALENTINA = '2:Guiones';
+const NICO = '1:Ventas';
 
 const marca = (m: Record<string, number>, id: string) => {
   const t = m[id];
@@ -176,7 +177,7 @@ export function respuestaDemo(estado: EstadoDemo): string | undefined {
 const ALIVIO_BRUNO = aprobar({
   id: '',
   nombre: '',
-  rol: 'Publicadora',
+  rol: 'Publicación',
   departamento: '',
   estado: 'esperando_decision',
   tarea: '',

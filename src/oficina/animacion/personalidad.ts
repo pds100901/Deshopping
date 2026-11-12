@@ -45,34 +45,34 @@ const lectura: PerfilIdle = {
 /** Perfil por rol (los mismos roles que `vestuario/roles.ts`). */
 export const PERFILES: Record<string, PerfilIdle> = {
   Catálogo: desarrollo,
-  Inventario: desarrollo,
+  Bodega: desarrollo,
   Regalos: desarrollo,
-  Publicadora: desarrollo,
-  'Atención por WhatsApp': ventas,
-  'Pedidos de clientes': ventas,
+  Publicación: desarrollo,
+  Ventas: ventas,
+  Pedidos: ventas,
   Cotizaciones: {
     pesos: { respirar: 3, tamborilear: 3, rascarse_cabeza: 2, mirar_alrededor: 2 },
     destinoPaseo: 'cafe',
     pausa: 'cafe',
   },
-  Guionista: contenido,
-  'Editora de video': contenido,
-  Diseñadora: contenido,
-  Contadora: papeles,
+  Guiones: contenido,
+  Video: contenido,
+  'Diseño y contenido': contenido,
+  'Reportes y estadísticas': papeles,
   Promociones: { ...papeles, pesos: { revisar_papeles: 4, respirar: 3, tamborilear: 2 } },
   Cobros: { ...ventas, pesos: { telefono: 4, revisar_papeles: 2, respirar: 3 } },
-  'Asistente personal': {
+  Agenda: {
     ...PERFIL_NEUTRO,
     pesos: { respirar: 4, mirar_alrededor: 3, telefono: 2 },
   },
   Viajes: { ...PERFIL_NEUTRO, pesos: { respirar: 3, mirar_alrededor: 3, telefono: 2 } },
   Entregas: { ...PERFIL_NEUTRO, pesos: { respirar: 4, mirar_alrededor: 3, tamborilear: 2 } },
-  'Compras SHEIN': lectura,
-  'Compras Temu': {
+  Compras: lectura,
+  Carritos: {
     ...lectura,
     pesos: { leer_documento: 3, mirar_alrededor: 4, respirar: 3 },
   },
-  'Cazadora de ofertas': { ...lectura, pesos: { revisar_papeles: 3, leer_documento: 3, respirar: 3 } },
+  Ofertas: { ...lectura, pesos: { revisar_papeles: 3, leer_documento: 3, respirar: 3 } },
 };
 
 /** Perfil de un rol; los desconocidos usan el neutro. */

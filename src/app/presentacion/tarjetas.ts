@@ -11,11 +11,11 @@ export const TARJETAS: {
   dy?: number;
 }[] = [
   { sala: 'desarrollo', agenteId: '0:Catálogo', accion: 'Actualizando el catálogo' },
-  { sala: 'contenido', agenteId: '2:Guionista', accion: 'Escribiendo el reel' },
-  { sala: 'ventas', agenteId: '1:Atención por WhatsApp', accion: 'Avisando a clientas' },
-  { sala: 'finanzas', agenteId: '3:Contadora', accion: 'Cuadrando el mes' },
-  { sala: 'living', agenteId: '4:Viajes', accion: 'Esperando tu orden' },
-  { sala: 'investigacion', agenteId: '5:Compras SHEIN', accion: 'Armando el carrito', dx: 330, dy: 70 },
+  { sala: 'contenido', agenteId: '2:Guiones', accion: 'Escribiendo el reel' },
+  { sala: 'ventas', agenteId: '1:Ventas', accion: 'Avisando a clientas' },
+  { sala: 'finanzas', agenteId: '3:Cobros', accion: 'Al día con los cobros' },
+  { sala: 'living', agenteId: '4:Entregas', accion: 'Organizando entregas' },
+  { sala: 'investigacion', agenteId: '5:Compras', accion: 'Buscando tesoros', dx: 330, dy: 70 },
 ];
 
 /** Segundos entre una tarjeta y la siguiente en la cascada, y lo que dura cada entrada/salida. */

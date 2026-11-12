@@ -1,3 +1,4 @@
+import { personajeDe } from '../src/app/personajes';
 import { requiereAprobacion } from '../src/app/presentacion/aprobacion';
 import {
   buscarPerfil,
@@ -97,16 +98,16 @@ function validar(entrada: unknown): PeticionOrden | null {
 
 /**
  * Rol de la oficina → perfil del cerebro (`PERFILES_DE_ROL` y `PERFILES_GENERALES`). Solo los
- * roles con un perfil equivalente; el resto (Catálogo, Inventario, Publicadora, Compras SHEIN…)
+ * roles con un perfil equivalente; el resto (Catálogo, Bodega, Publicación, Compras…)
  * habla solo con la carta genérica. Es un `Map`: un rol como «constructor» no encuentra nada.
  */
 export const PERFIL_POR_ROL: ReadonlyMap<string, string> = new Map([
-  ['Atención por WhatsApp', 'vendedor'],
+  ['Ventas', 'vendedor'],
   ['Cotizaciones', 'redactor'],
-  ['Guionista', 'redactor'],
-  ['Diseñadora', 'disenador'],
-  ['Asistente personal', 'asistente'],
-  ['Contadora', 'contador'],
+  ['Guiones', 'redactor'],
+  ['Diseño y contenido', 'disenador'],
+  ['Agenda', 'asistente'],
+  ['Reportes y estadísticas', 'contador'],
 ]);
 
 /** Cómo se llama cada departamento del cerebro en la oficina de De Shopping con Pau. */
@@ -190,9 +191,11 @@ export function promptDelAgente(peticion: PeticionOrden, juicio: Juicio, nombre?
       ? `Esta orden es delicada: ${espera}`
       : 'Confirma qué vas a hacer con la orden y cómo.';
   const { perfil } = juicio;
+  const personaje = personajeDe(peticion.rol);
   return [
     `Eres ${agente}, ${rol} en la oficina de De Shopping con Pau.${tarea ? ` Tu tarea actual: ${tarea}.` : ''}`,
     NEGOCIO,
+    ...(personaje ? [`Tu carácter: ${personaje.descripcion}`] : []),
     'No inventes precios, fechas, existencias ni datos de clientas: si no los tienes, dilo.',
     'Hablas tú, en primera persona, como ese agente: no eres Jules ni un asistente genérico.',
     ...(perfil

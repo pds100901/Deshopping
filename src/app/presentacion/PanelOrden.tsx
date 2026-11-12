@@ -3,6 +3,8 @@ import type { FormEvent } from 'react';
 import { departamentosBase } from '@jules/oficina';
 import type { AgenteOficina, EstadoAgente } from '@jules/oficina';
 import { EnlacesArtefactos } from '../EnlacesArtefactos';
+import { Retrato } from '../Retrato';
+import { personajeDe } from '../personajes';
 import { sugerenciasDe } from './ordenes';
 
 const TITULO: Record<EstadoAgente, string> = {
@@ -64,7 +66,8 @@ export function PanelOrden({
       aria-label={`Panel de ${agente.nombre}`}
     >
       <div className="panel-orden-cabeza">
-        <div>
+        <Retrato rol={agente.rol} nombre={agente.nombre} />
+        <div className="panel-orden-titulo">
           <h2>{agente.nombre}</h2>
           <div className="sub">
             {agente.rol} · {depto ? depto.nombre : agente.departamento}
@@ -74,6 +77,7 @@ export function PanelOrden({
           ×
         </button>
       </div>
+      {personajeDe(agente.rol) && <p className="caracter">{personajeDe(agente.rol)?.descripcion}</p>}
       <div className={`estado estado-${agente.estado}`} aria-live="polite">
         <strong>{TITULO[agente.estado]}</strong>
         <span>{agente.tarea}</span>

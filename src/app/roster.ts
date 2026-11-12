@@ -1,94 +1,68 @@
 import { departamentosBase } from '@jules/oficina';
 import type { Actividad, AgenteOficina, EstadoAgente } from '@jules/oficina';
+import { personajeDe } from './personajes';
 
 /**
  * El equipo de De Shopping con Pau. Los departamentos van por número, en el orden de
  * `departamentosBase`: 0 Tienda en línea, 1 Pedidos, 2 Contenido, 3 Finanzas,
- * 4 Agenda y viajes, 5 Compras.
+ * 4 Agenda y viajes, 5 Compras. Los nombres y la personalidad de cada uno están en `personajes.ts`.
  */
 
 /** Qué está haciendo cada rol (el texto que ves al tocar a un agente). */
 const TAREAS: Record<string, string> = {
   Catálogo: 'Actualizando «Disponible ahora» con lo que llegó esta semana.',
-  Inventario: 'Contando existencias y marcando lo agotado.',
+  Bodega: 'Contando existencias y marcando lo agotado.',
   Regalos: 'Armando combinaciones para «Armá tu regalo».',
-  Publicadora: 'Los cambios del catálogo están listos. Pide permiso para publicarlos.',
-  'Atención por WhatsApp':
-    'Preparó los avisos de «tu pedido ya llegó». Espera tu aprobación para enviarlos.',
-  'Pedidos de clientes': 'Pasando los encargos nuevos a «Pedidos de clientes».',
+  Publicación: 'Los cambios del catálogo están listos. Pide permiso para publicarlos.',
+  Ventas: 'Preparó los avisos de «tu pedido ya llegó». Espera tu aprobación para enviarlos.',
+  Pedidos: 'Pasando los encargos nuevos a «Pedidos de clientes».',
   Cotizaciones: 'Sacando precios con el Cotizador para los encargos de hoy.',
-  Guionista: 'Escribiendo el guion del próximo reel desde el banco de contenido.',
-  'Editora de video': 'Editando el video de «Cómo pedir».',
-  Diseñadora: 'Armando las historias de la semana con las plantillas de la marca.',
-  Contadora: 'Cuadrando ingresos y gastos del mes.',
-  Promociones: 'Revisando qué códigos de descuento siguen activos.',
+  'Diseño y contenido': 'Armando las historias de la semana con las plantillas de la marca.',
+  Guiones: 'Escribiendo el guion del próximo reel desde el banco de contenido.',
+  Video: 'Editando el video de «Cómo pedir».',
+  'Reportes y estadísticas': 'Armando el reporte de ventas de la semana.',
   Cobros: 'Revisando adelantos y saldos pendientes.',
-  'Asistente personal': 'Ordenando la Agenda de Pau para mañana.',
+  Promociones: 'Revisando qué códigos de descuento siguen activos.',
+  Agenda: 'Ordenando la Agenda de Pau para mañana.',
   Viajes: 'Preparando la lista del próximo viaje de compras.',
   Entregas: 'Organizando las entregas y los envíos de la semana.',
-  'Compras SHEIN': 'Armando el carrito de la semana en «Pedidos SHEIN».',
-  'Compras Temu': 'Armando el carrito de la semana en «Pedidos Temu».',
-  'Cazadora de ofertas': 'Buscando ofertas y cupones para los encargos pendientes.',
+  Compras: 'Buscando lo de la lista en SHEIN, en Temu y para el próximo viaje.',
+  Carritos: 'Armando los carritos de la semana en «Pedidos SHEIN» y «Pedidos Temu».',
+  Ofertas: 'Buscando ofertas y cupones para los encargos pendientes.',
 };
 
-/**
- * Nombre propio de cada agente (el rol queda debajo en rótulos y panel). Aquí se cambian los
- * nombres: el paquete `@jules/oficina` solo muestra `nombre`.
- */
-const NOMBRES: Record<string, string> = {
-  Catálogo: 'Camila',
-  Inventario: 'Daniela',
-  Regalos: 'Mariana',
-  Publicadora: 'Renata',
-  'Atención por WhatsApp': 'Sofi',
-  'Pedidos de clientes': 'Andrea',
-  Cotizaciones: 'Fernanda',
-  Guionista: 'Valentina',
-  'Editora de video': 'Gabi',
-  Diseñadora: 'Isa',
-  Contadora: 'Doña Marta',
-  Promociones: 'Paola',
-  Cobros: 'Karla',
-  'Asistente personal': 'Jime',
-  Viajes: 'Nati',
-  Entregas: 'Meli',
-  'Compras SHEIN': 'Lucía',
-  'Compras Temu': 'Carol',
-  'Cazadora de ofertas': 'Ximena',
-};
-
-/** Roles de cada departamento; `true` = se puede clonar para llenar la sala. */
+/** Roles de cada departamento; `true` = se puede clonar para llenar la sala del laboratorio. */
 const ROLES: [string, boolean][][] = [
   [
     ['Catálogo', true],
-    ['Inventario', true],
+    ['Bodega', true],
     ['Regalos', true],
-    ['Publicadora', true],
+    ['Publicación', true],
   ],
   [
-    ['Atención por WhatsApp', true],
-    ['Pedidos de clientes', true],
+    ['Ventas', true],
+    ['Pedidos', true],
     ['Cotizaciones', true],
   ],
   [
-    ['Guionista', true],
-    ['Editora de video', true],
-    ['Diseñadora', true],
+    ['Diseño y contenido', false],
+    ['Guiones', true],
+    ['Video', true],
   ],
   [
-    ['Contadora', false],
-    ['Promociones', true],
+    ['Reportes y estadísticas', false],
     ['Cobros', true],
+    ['Promociones', true],
   ],
   [
-    ['Asistente personal', false],
+    ['Agenda', false],
     ['Viajes', false],
     ['Entregas', true],
   ],
   [
-    ['Compras SHEIN', false],
-    ['Compras Temu', true],
-    ['Cazadora de ofertas', true],
+    ['Compras', false],
+    ['Carritos', true],
+    ['Ofertas', true],
   ],
 ];
 
@@ -98,14 +72,14 @@ const ROLES: [string, boolean][][] = [
  */
 const BASE: [number, string, EstadoAgente, Actividad?][] = [
   [0, 'Catálogo', 'trabajando', 'escribiendo'],
-  [0, 'Inventario', 'trabajando', 'leyendo'],
+  [0, 'Bodega', 'trabajando', 'leyendo'],
   [0, 'Regalos', 'libre'],
-  [0, 'Publicadora', 'esperando_decision', 'pensando'],
-  [1, 'Atención por WhatsApp', 'esperando_decision', 'hablando'],
-  [2, 'Guionista', 'libre'],
-  [3, 'Contadora', 'libre'],
-  [4, 'Asistente personal', 'trabajando', 'hablando'],
-  [5, 'Compras SHEIN', 'trabajando', 'pensando'],
+  [0, 'Publicación', 'esperando_decision', 'pensando'],
+  [1, 'Ventas', 'esperando_decision', 'hablando'],
+  [2, 'Diseño y contenido', 'libre'],
+  [3, 'Reportes y estadísticas', 'libre'],
+  [4, 'Entregas', 'trabajando', 'hablando'],
+  [5, 'Compras', 'trabajando', 'pensando'],
 ];
 
 const POR_SALA: Record<number, number[]> = {
@@ -125,7 +99,8 @@ export function armarRoster(cantidad: number): AgenteOficina[] {
     const clave = `${sala}:${rol}`;
     const n = (usados.get(clave) ?? 0) + 1;
     usados.set(clave, n);
-    const nombre = n > 1 ? `${rol} · ${n}` : rol;
+    const propio = personajeDe(rol)?.nombre ?? rol;
+    const nombre = n > 1 ? `${propio} · ${n}` : propio;
     agentes.push({
       id: `${sala}:${nombre}`,
       nombre,
@@ -161,24 +136,24 @@ export function armarRoster(cantidad: number): AgenteOficina[] {
 /** Departamento, rol, estado y actividad de cada agente de la oficina (los 19 del recorrido). */
 const AGENTES_RECORRIDO: [number, string, EstadoAgente, Actividad?][] = [
   [0, 'Catálogo', 'trabajando', 'escribiendo'],
-  [0, 'Inventario', 'trabajando', 'leyendo'],
+  [0, 'Bodega', 'trabajando', 'leyendo'],
   [0, 'Regalos', 'libre'],
-  [0, 'Publicadora', 'esperando_decision', 'pensando'],
-  [1, 'Atención por WhatsApp', 'esperando_decision', 'hablando'],
-  [1, 'Pedidos de clientes', 'trabajando', 'leyendo'],
+  [0, 'Publicación', 'esperando_decision', 'pensando'],
+  [1, 'Ventas', 'esperando_decision', 'hablando'],
+  [1, 'Pedidos', 'trabajando', 'leyendo'],
   [1, 'Cotizaciones', 'trabajando', 'escribiendo'],
-  [2, 'Guionista', 'trabajando', 'escribiendo'],
-  [2, 'Editora de video', 'trabajando', 'pensando'],
-  [2, 'Diseñadora', 'libre'],
-  [3, 'Contadora', 'trabajando', 'leyendo'],
-  [3, 'Promociones', 'trabajando', 'pensando'],
-  [3, 'Cobros', 'libre'],
-  [4, 'Asistente personal', 'trabajando', 'hablando'],
+  [2, 'Guiones', 'trabajando', 'escribiendo'],
+  [2, 'Diseño y contenido', 'trabajando', 'pensando'],
+  [2, 'Video', 'libre'],
+  [3, 'Cobros', 'trabajando', 'leyendo'],
+  [3, 'Reportes y estadísticas', 'trabajando', 'pensando'],
+  [3, 'Promociones', 'libre'],
+  [4, 'Entregas', 'trabajando', 'hablando'],
+  [4, 'Agenda', 'trabajando', 'leyendo'],
   [4, 'Viajes', 'libre'],
-  [4, 'Entregas', 'trabajando', 'leyendo'],
-  [5, 'Compras SHEIN', 'trabajando', 'pensando'],
-  [5, 'Compras Temu', 'trabajando', 'leyendo'],
-  [5, 'Cazadora de ofertas', 'libre'],
+  [5, 'Compras', 'trabajando', 'pensando'],
+  [5, 'Carritos', 'trabajando', 'leyendo'],
+  [5, 'Ofertas', 'libre'],
 ];
 
 /**
@@ -188,7 +163,7 @@ const AGENTES_RECORRIDO: [number, string, EstadoAgente, Actividad?][] = [
 export function armarRosterRecorrido(): AgenteOficina[] {
   return AGENTES_RECORRIDO.map(([sala, rol, estado, actividad]) => ({
     id: `${sala}:${rol}`,
-    nombre: NOMBRES[rol] ?? rol,
+    nombre: personajeDe(rol)?.nombre ?? rol,
     rol,
     departamento: departamentosBase[sala]?.id ?? '',
     estado,

@@ -1,5 +1,6 @@
 import { departamentosBase } from '@jules/oficina';
 import { EnlacesArtefactos } from './EnlacesArtefactos';
+import { Retrato } from './Retrato';
 import type { AgenteOficina, EstadoAgente } from '@jules/oficina';
 
 const TITULO: Record<EstadoAgente, string> = {
@@ -36,10 +37,13 @@ export function Detalle({ agente, onEstado, onVestir }: Props) {
   );
   return (
     <aside className="hud detalle" aria-live="polite">
-      <div>
+      <div className="detalle-cabeza">
+        <Retrato rol={agente.rol} nombre={agente.nombre} />
+        <div>
         <h2>{agente.nombre}</h2>
         <div className="sub">
-          {depto ? `${depto.nombre} · ${depto.lider}` : agente.departamento}
+          {agente.rol} · {depto ? depto.nombre : agente.departamento}
+        </div>
         </div>
       </div>
       <div className={`estado estado-${agente.estado}`}>

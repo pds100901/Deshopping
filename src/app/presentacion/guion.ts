@@ -8,7 +8,7 @@
  *
  * Los ids de agente son `${departamento}:${rol}` según `armarRosterRecorrido` (0 Tienda en línea,
  * 1 Pedidos, 2 Contenido, 3 Finanzas, 4 Agenda y viajes, 5 Compras). Las marcas conservan los
- * nombres del guion original: «tomas» = Camila, «bruno» = Renata, «nico» = Sofi.
+ * nombres del guion original: «tomas» = Vicky Vitrina, «bruno» = Clara Clic, «valentina» = Gigi Guion, «nico» = Coco Caja.
  */
 export type Accion =
   /** Entra a un ambiente (`null` = casa completa sin cambiar el encuadre de orientación). */
@@ -61,15 +61,15 @@ export const GUION: Paso[] = [
   { linea: 'Ella es Jules', ancla: 'se lo pido a ella', accion: { marca: 'mira-camara' } },
   { linea: 'Hola. Pau da', ancla: null, accion: { marca: 'jules-fin', fin: true } },
   { linea: 'Arriba está la Tienda', ancla: null, accion: { ambiente: 'desarrollo' } },
-  { linea: 'Arriba está la Tienda', ancla: 'Camila', accion: { enfoca: '0:Catálogo' } },
+  { linea: 'Arriba está la Tienda', ancla: 'Vicky', accion: { enfoca: '0:Catálogo' } },
   { linea: 'Arriba está la Tienda', ancla: 'si la toco', accion: { marca: 'tomas-toca' } },
-  { linea: 'Y ella es Renata', ancla: null, accion: { marca: 'tomas-fin' } },
-  { linea: 'Y ella es Renata', ancla: 'Renata', accion: { enfoca: '0:Publicadora' } },
-  { linea: 'Y ella es Renata', ancla: 'mirándome', accion: { marca: 'bruno-panel' } },
+  { linea: 'Y ella es Clara', ancla: null, accion: { marca: 'tomas-fin' } },
+  { linea: 'Y ella es Clara', ancla: 'Clara', accion: { enfoca: '0:Publicación' } },
+  { linea: 'Y ella es Clara', ancla: 'mirándome', accion: { marca: 'bruno-panel' } },
   { linea: 'Yo que vos lo apruebo', ancla: 'apruebo', accion: { marca: 'bruno-aprueba' } },
   { linea: 'Al lado está Contenido', ancla: null, accion: { marca: 'bruno-fin' } },
   { linea: 'Al lado está Contenido', ancla: null, accion: { ambiente: 'contenido' } },
-  { linea: 'Al lado está Contenido', ancla: 'Valentina', accion: { enfoca: '2:Guionista' } },
+  { linea: 'Al lado está Contenido', ancla: 'Gigi', accion: { enfoca: '2:Guiones' } },
   {
     linea: 'Al lado está Contenido',
     ancla: 'también el de este',
@@ -77,17 +77,17 @@ export const GUION: Paso[] = [
   },
   { linea: 'Abajo, en Pedidos', ancla: null, accion: { marca: 'valentina-fin' } },
   { linea: 'Abajo, en Pedidos', ancla: null, accion: { ambiente: 'ventas' } },
-  { linea: 'Abajo, en Pedidos', ancla: 'Sofi', accion: { enfoca: '1:Atención por WhatsApp' } },
+  { linea: 'Abajo, en Pedidos', ancla: 'Coco', accion: { enfoca: '1:Ventas' } },
   { linea: 'Abajo, en Pedidos', ancla: 'Le pido', accion: { marca: 'nico-pide' } },
   { linea: 'Abajo, en Pedidos', ancla: 'se pone a trabajar', accion: { marca: 'nico-envia' } },
-  { linea: 'Doña Marta lleva', ancla: null, accion: { marca: 'nico-fin' } },
-  { linea: 'Doña Marta lleva', ancla: null, accion: { ambiente: 'finanzas' } },
-  { linea: 'Doña Marta lleva', ancla: 'Marta', accion: { enfoca: '3:Contadora' } },
-  { linea: 'arriba en la torre está Lucía', ancla: null, accion: { ambiente: 'investigacion' } },
-  { linea: 'arriba en la torre está Lucía', ancla: 'Lucía', accion: { enfoca: '5:Compras SHEIN' } },
-  { linea: 'sé en qué está cada una', ancla: null, accion: { general: true } },
-  { linea: 'sé en qué está cada una', ancla: null, accion: { marca: 'tarjetas' } },
-  { linea: 'sé en qué está cada una', ancla: null, accion: { marca: 'tarjetas-fin', fin: true } },
+  { linea: 'Don Colón lleva', ancla: null, accion: { marca: 'nico-fin' } },
+  { linea: 'Don Colón lleva', ancla: null, accion: { ambiente: 'finanzas' } },
+  { linea: 'Don Colón lleva', ancla: 'Colón', accion: { enfoca: '3:Cobros' } },
+  { linea: 'arriba en la torre está Vale', ancla: null, accion: { ambiente: 'investigacion' } },
+  { linea: 'arriba en la torre está Vale', ancla: 'Vale', accion: { enfoca: '5:Compras' } },
+  { linea: 'sé en qué está cada uno', ancla: null, accion: { general: true } },
+  { linea: 'sé en qué está cada uno', ancla: null, accion: { marca: 'tarjetas' } },
+  { linea: 'sé en qué está cada uno', ancla: null, accion: { marca: 'tarjetas-fin', fin: true } },
   { linea: 'Ahora te toca a vos', ancla: null, accion: { libre: true } },
   { linea: 'escribinos por WhatsApp', ancla: null, accion: { marca: 'cta' } },
 ];
