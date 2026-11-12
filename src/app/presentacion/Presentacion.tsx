@@ -64,7 +64,7 @@ const OCULTAR_PAUSA_MS = 2000;
 const ROTULO_SALA_MS = 3500;
 const AVISO_GRABACION_MS = 1000;
 /** La oficina corre dentro de un artefacto de claude.ai (ahí el modelo es `sample`, sin servidor local). */
-const EN_ARTEFACTO = typeof window !== 'undefined' && 'claude' in window;
+const enArtefacto = () => typeof window !== 'undefined' && 'claude' in window;
 const ALIVIO_ENTREGA = 'Gracias. Queda aprobada.';
 const TEXTO_CTA = 'Pedí por WhatsApp · De Shopping con Pau 🛍️';
 
@@ -711,7 +711,7 @@ export function Presentacion() {
     actualizar(seleccionado.id, nuevo, respuestaDe(seleccionado.rol, ordenes.current++));
     // El trabajo de verdad: la entrega llega a la bandeja. La frase corta del modelo solo se
     // pide en la computadora (en el artefacto no hay servidor local).
-    if (!EN_ARTEFACTO) pedirAlModelo(seleccionado, texto);
+    if (!enArtefacto()) pedirAlModelo(seleccionado, texto);
     trabajo.encargar(seleccionado, texto);
     const clip = elegirClip(clips, ultimoClip.current, Math.random, seleccionado.rol);
     if (clip) {
