@@ -1496,3 +1496,124 @@ p {
 .presentacion .caracter {
   font-size: 18px;
 }
+
+/* «Equipo»: lista de lo que hace cada agente. */
+.btn-equipo {
+  top: var(--arriba);
+  left: var(--izq);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 20px;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.btn-equipo b {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 99px;
+  background: var(--amber);
+  color: #fff;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.panel-equipo {
+  top: calc(var(--arriba) + 62px);
+  left: var(--izq);
+  bottom: var(--abajo);
+  width: min(440px, calc(100vw - 32px));
+  padding: 16px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 30;
+}
+
+.panel-equipo-cabeza {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-equipo h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 24px;
+}
+
+.panel-equipo h3 {
+  margin: 16px 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c2256f;
+}
+
+.fila-agente {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 16px;
+  background: none;
+  text-align: left;
+}
+
+.fila-agente:hover,
+.fila-agente.activa {
+  background: #ffdcea;
+}
+
+.panel-equipo .retrato {
+  width: 52px;
+  height: 52px;
+}
+
+.panel-equipo .retrato-inicial {
+  font-size: 24px;
+}
+
+.fila-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.fila-texto small {
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.fila-estado {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.estado-texto-trabajando {
+  color: var(--teal);
+}
+
+.estado-texto-esperando_decision {
+  color: #c2256f;
+}
+
+.estado-texto-libre {
+  color: var(--muted);
+}
+
+.fila-tarea {
+  color: var(--fg);
+}

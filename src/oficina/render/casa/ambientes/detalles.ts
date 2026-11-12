@@ -20,23 +20,23 @@ export interface Detalle {
 }
 
 export const DETALLES: readonly Detalle[] = [
-  { ambiente: 'living', x: -4.6, z: -3.4, radio: 0.35, tipo: 'olivo', maceta: '#d8cfc0' },
-  { ambiente: 'gimnasio', x: -10.65, z: -3.5, radio: 0.25, tipo: 'sansevieria', maceta: '#1b1c1e' },
-  { ambiente: 'finanzas', x: -4.75, z: -3.35, radio: 0.32, tipo: 'ficus', maceta: '#b5562f' },
-  { ambiente: 'ventas', x: 4.75, z: -3.35, radio: 0.32, tipo: 'palma', maceta: '#e9e4da' },
-  { ambiente: 'desarrollo', x: -4.7, z: -3.3, radio: 0.3, tipo: 'ficus', maceta: '#1b1c1e' },
+  { ambiente: 'living', x: -4.6, z: -3.4, radio: 0.35, tipo: 'olivo', maceta: '#fbd0e1' },
+  { ambiente: 'gimnasio', x: -10.65, z: -3.5, radio: 0.25, tipo: 'sansevieria', maceta: '#853267' },
+  { ambiente: 'finanzas', x: -4.75, z: -3.35, radio: 0.32, tipo: 'ficus', maceta: '#f691ba' },
+  { ambiente: 'ventas', x: 4.75, z: -3.35, radio: 0.32, tipo: 'palma', maceta: '#fbd0e1' },
+  { ambiente: 'desarrollo', x: -4.7, z: -3.3, radio: 0.3, tipo: 'ficus', maceta: '#853267' },
   {
     ambiente: 'desarrollo',
     x: -15.45,
     z: -3.4,
     radio: 0.25,
     tipo: 'sansevieria',
-    maceta: '#e9e4da',
+    maceta: '#fbd0e1',
   },
-  { ambiente: 'contenido', x: 4.6, z: -3.35, radio: 0.25, tipo: 'sansevieria', maceta: '#b5562f' },
-  { ambiente: 'cocina', x: 15.4, z: 3.2, radio: 0.32, tipo: 'olivo', maceta: '#e9e4da' },
-  { ambiente: 'investigacion', x: 3.45, z: -3.45, radio: 0.3, tipo: 'palma', maceta: '#1d2a44' },
-  { ambiente: 'terraza', x: -14.5, z: 5.4, radio: 0.2, tipo: 'mesita', maceta: '#000000' },
+  { ambiente: 'contenido', x: 4.6, z: -3.35, radio: 0.25, tipo: 'sansevieria', maceta: '#f691ba' },
+  { ambiente: 'cocina', x: 15.4, z: 3.2, radio: 0.32, tipo: 'olivo', maceta: '#fbd0e1' },
+  { ambiente: 'investigacion', x: 3.45, z: -3.45, radio: 0.3, tipo: 'palma', maceta: '#86d1ea' },
+  { ambiente: 'terraza', x: -14.5, z: 5.4, radio: 0.2, tipo: 'mesita', maceta: '#853267' },
 ];
 
 function semilla(n: number) {
@@ -54,7 +54,7 @@ function planta(t: Taller, d: Detalle, y: number, n: number): void {
     color: d.maceta,
   });
   t.cilindro('tinte', d.x, y + alto - 0.02, d.z, d.radio * 0.8, d.radio * 0.8, 0.02, 14, {
-    color: '#3a2a1e',
+    color: '#f04c8e',
   });
   const base = y + alto;
   if (d.tipo === 'sansevieria') {
@@ -73,20 +73,20 @@ function planta(t: Taller, d: Detalle, y: number, n: number): void {
           ry: a,
           rx: (r() - 0.5) * 0.25,
           rz: (r() - 0.5) * 0.25,
-          color: k % 3 ? '#3f5a2c' : '#566f34',
+          color: k % 3 ? '#6aa640' : '#7ba83e',
         },
       );
     }
     return;
   }
   if (d.tipo === 'palma') {
-    t.cilindro('tinte', d.x, base + 0.35, d.z, 0.025, 0.035, 0.7, 6, { color: '#6b5a3a' });
+    t.cilindro('tinte', d.x, base + 0.35, d.z, 0.025, 0.035, 0.7, 6, { color: '#f15795' });
     for (let k = 0; k < 9; k++) {
       const a = (k * 2 * Math.PI) / 9;
       t.en(d.x, base + 0.55 + (k % 3) * 0.12, d.z, a, () => {
         t.caja('tinte', 0, 0.12, 0.32, 0.16, 0.012, 0.7, {
           rx: -0.35 - (k % 2) * 0.25,
-          color: '#4d6b30',
+          color: '#72aa3c',
         });
       });
     }
@@ -94,11 +94,11 @@ function planta(t: Taller, d: Detalle, y: number, n: number): void {
   }
   const tronco = d.tipo === 'olivo' ? 1.1 : 1.3;
   t.cilindro('tinte', d.x, base + tronco / 2, d.z, 0.025, 0.04, tronco, 6, {
-    color: d.tipo === 'olivo' ? '#6a5b48' : '#5a4632',
+    color: d.tipo === 'olivo' ? '#f2639c' : '#f04c8e',
     rz: 0.06,
   });
   const verde =
-    d.tipo === 'olivo' ? ['#7d8a5c', '#6b7a4c', '#8e9a6a'] : ['#2f5a24', '#3d6b2c', '#27491e'];
+    d.tipo === 'olivo' ? ['#9baf6a', '#8ba653', '#aab97e'] : ['#4faf36', '#57ae37', '#50ae37'];
   for (let k = 0; k < 8; k++) {
     const a = r() * Math.PI * 2;
     const dist = 0.08 + r() * 0.18;
@@ -119,9 +119,9 @@ function mesita(t: Taller, d: Detalle, y: number): void {
   t.cilindro('deck', d.x, y + 0.42, d.z, d.radio, d.radio, 0.03, 20);
   t.cilindro('deck', d.x, y + 0.2, d.z, 0.03, 0.04, 0.4, 8);
   t.cilindro('deck', d.x, y + 0.01, d.z, 0.14, 0.14, 0.02, 16);
-  t.cilindro('tinte-brillo', d.x - 0.06, y + 0.5, d.z, 0.03, 0.025, 0.13, 10, { color: '#e2b04a' });
+  t.cilindro('tinte-brillo', d.x - 0.06, y + 0.5, d.z, 0.03, 0.025, 0.13, 10, { color: '#fbd0e1' });
   t.cilindro('tinte-brillo', d.x + 0.07, y + 0.49, d.z + 0.03, 0.028, 0.024, 0.11, 10, {
-    color: '#e66a3a',
+    color: '#f4d67b',
   });
 }
 

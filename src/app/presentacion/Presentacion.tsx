@@ -5,6 +5,7 @@ import type { AgenteOficina as Agente, PresenciaJules, Proyector } from '@jules/
 import { fechaChileA } from '../hora';
 import { IndicadorAmbiente } from '../IndicadorAmbiente';
 import { Leyenda } from '../Leyenda';
+import { PanelEquipo } from '../PanelEquipo';
 import { armarRosterRecorrido } from '../roster';
 import { palabrasDe } from './alineacion';
 import type { Alineacion } from './alineacion';
@@ -771,6 +772,13 @@ export function Presentacion() {
       {interactivo && (
         <>
           <Leyenda />
+          {!grabando && (
+            <PanelEquipo
+              agentes={agentes}
+              seleccionadoId={seleccionadoId}
+              onSeleccionar={alSeleccionar}
+            />
+          )}
           <IndicadorAmbiente
             ambienteId={ambienteLibre}
             onSalir={() => setAmbienteLibre(null)}

@@ -15,7 +15,7 @@ import type { Taller } from './taller';
 
 const PI = Math.PI;
 /** Cuero coñac de los sillones y taburetes. */
-const COGNAC = '#8e4a26';
+const COGNAC = '#f2659d';
 
 type Dibujo = (t: Taller, m: Mueble, i: number) => void;
 
@@ -130,16 +130,16 @@ const escritorioNogal: Dibujo = (t, m, i) => {
         t.cilindro('acero', 0, 0.01, 0, 0.05, 0.05, 0.02, 12);
         t.caja('acero', 0, 0.2, 0, 0.018, 0.4, 0.018);
         t.caja('acero', 0, 0.42, 0.14, 0.018, 0.018, 0.3, { rx: 0.35 });
-        t.cilindro('tinte', 0, 0.42, 0.3, 0.035, 0.035, 0.14, 12, { color: '#1a1b1e' });
+        t.cilindro('tinte', 0, 0.42, 0.3, 0.035, 0.035, 0.14, 12, { color: '#853267' });
         t.cilindro('laton', 0, 0.42, 0.3, 0.037, 0.037, 0.02, 12);
       });
     }
     // Teclado, ratón y taza.
-    t.bloque('tinte-brillo', 0, 0.74, 0.1, 0.42, 0.014, 0.13, { color: '#2a2c30' });
-    t.bloque('tinte-brillo', 0.3, 0.74, 0.12, 0.06, 0.02, 0.1, { color: '#2a2c30' });
+    t.bloque('tinte-brillo', 0, 0.74, 0.1, 0.42, 0.014, 0.13, { color: '#853267' });
+    t.bloque('tinte-brillo', 0.3, 0.74, 0.12, 0.06, 0.02, 0.1, { color: '#853267' });
     if (i % 2 === 0) {
       t.cilindro('tinte-brillo', 0.52, 0.79, -0.05, 0.04, 0.035, 0.1, 12, {
-        color: i % 4 ? '#f3efe8' : '#2f4a3a',
+        color: i % 4 ? '#fbd0e1' : '#4e986c',
       });
     }
     // Lámpara de escritorio de latón con su charco de luz.
@@ -148,10 +148,10 @@ const escritorioNogal: Dibujo = (t, m, i) => {
       t.cilindro('laton', 0, 0.2, 0, 0.007, 0.007, 0.38, 6);
       t.cilindro('laton', 0, 0.39, 0.07, 0.006, 0.006, 0.16, 6, { rx: PI / 2 - 0.4 });
       t.cilindro('laton', 0, 0.42, 0.15, 0.025, 0.07, 0.1, 16);
-      t.cilindro('emisivo', 0, 0.37, 0.15, 0.05, 0.05, 0.004, 12, { color: '#fff1d0' });
+      t.cilindro('emisivo', 0, 0.37, 0.15, 0.05, 0.05, 0.004, 12, { color: '#f4d67b' });
     });
   });
-  luz(t, () => charco(t, w / 2 - 0.2, 0.745, -0.02, 0.7, 0.55, '#7a5a30'));
+  luz(t, () => charco(t, w / 2 - 0.2, 0.745, -0.02, 0.7, 0.55, '#f25b98'));
 };
 
 /** Silla de oficina: base de cinco radios, cojín sobre bandeja y respaldo de malla curvo. */
@@ -161,7 +161,7 @@ const sillaMalla: Dibujo = (t) => {
     const a = (k * 2 * PI) / 5;
     t.en(0, 0, 0, a, () => {
       t.caja('acero', 0, 0.065, 0.11, 0.035, 0.03, 0.2, { rx: 0.08 });
-      t.esfera('tinte', 0, 0.025, 0.21, 0.025, 8, 1, { color: '#141516' });
+      t.esfera('tinte', 0, 0.025, 0.21, 0.025, 8, 1, { color: '#853267' });
     });
   }
   t.cilindro('laton', 0, 0.09, 0, 0.045, 0.06, 0.04, 16);
@@ -176,20 +176,20 @@ const sillaMalla: Dibujo = (t) => {
     0.44,
     0.03,
     {
-      color: '#1e1f22',
+      color: '#853267',
     },
   );
-  t.cojin('tinte', 0, arriba - 0.04, 0.01, 0.48, 0.08, 0.47, 0.035, { color: '#34373c' });
+  t.cojin('tinte', 0, arriba - 0.04, 0.01, 0.48, 0.08, 0.47, 0.035, { color: '#853267' });
   // Respaldo: espinazo de acero y malla curva que abraza la espalda.
   t.caja('acero', 0, (abajo + 0.6) / 2, -0.215, 0.05, 0.6 - abajo, 0.025);
-  t.pieza('tinte', arco(0.3, 0.025, 0.72, 0.36), 0, 0.53, 0.09, 1, 1, 1, { color: '#2b2e33' });
+  t.pieza('tinte', arco(0.3, 0.025, 0.72, 0.36), 0, 0.53, 0.09, 1, 1, 1, { color: '#853267' });
   t.pieza('acero', arco(0.3, 0.035, 0.74, 0.02), 0, 0.89, 0.085);
 };
 
 /** Silla de biblioteca: patas de nogal, faldón, cojín tapizado y respaldo de media luna. */
 const sillaMadera: Dibujo = (t, m) => {
   const { arriba, abajo } = ASIENTOS['silla-madera'];
-  const tapiz = m.ambiente === 'finanzas' ? '#2f4a3a' : '#25324d';
+  const tapiz = m.ambiente === 'finanzas' ? '#4e986c' : '#86d1ea';
   for (const x of [-0.2, 0.2]) {
     for (const z of [-0.19, 0.19]) t.cilindro('nogal', x, abajo / 2, z, 0.019, 0.014, abajo, 8);
   }
@@ -210,7 +210,7 @@ const sillaMadera: Dibujo = (t, m) => {
 const mesaLectura: Dibujo = (t, m, i) => {
   const { ancho: w, fondo: d } = m;
   t.bloque('nogal', 0, 0.7, 0, w, 0.05, d);
-  t.bloque('tinte', 0, 0.75, 0.04, w - 0.3, 0.004, d - 0.36, { color: '#24402f' });
+  t.bloque('tinte', 0, 0.75, 0.04, w - 0.3, 0.004, d - 0.36, { color: '#479e69' });
   for (const x of [-w / 2 + 0.07, w / 2 - 0.07]) {
     for (const z of [-d / 2 + 0.07, d / 2 - 0.07]) t.bloque('nogal', x, 0, z, 0.06, 0.7, 0.06);
   }
@@ -223,24 +223,24 @@ const mesaLectura: Dibujo = (t, m, i) => {
       t.cilindro('laton', 0, 0.16, 0, 0.008, 0.008, 0.3, 6);
       t.cilindro('tinte-brillo', 0, 0.33, 0.04, 0.09, 0.09, 0.3, 14, {
         rz: PI / 2,
-        color: '#1f5a3a',
+        color: '#2fb66d',
       });
-      t.caja('emisivo', 0, 0.3, 0.06, 0.24, 0.006, 0.04, { color: '#fff0c8' });
+      t.caja('emisivo', 0, 0.3, 0.06, 0.24, 0.006, 0.04, { color: '#f4d67b' });
     });
     // Pila de libros y un libro abierto.
-    const colores = ['#6e1f1c', '#1d2a44', '#c9a35a', '#2c4a3a'];
+    const colores = ['#ee2b86', '#86d1ea', '#fbcbde', '#4a9b70'];
     colores.forEach((color, k) =>
       t.bloque('tinte', w / 2 - 0.25, 0.75 + k * 0.035, -0.15, 0.24 - k * 0.02, 0.034, 0.17, {
         color,
         ry: k * 0.12,
       }),
     );
-    t.bloque('tinte', 0.05, 0.752, 0.12, 0.2, 0.012, 0.26, { color: '#efe8d8', rz: 0.06 });
-    t.bloque('tinte', -0.15, 0.752, 0.12, 0.2, 0.012, 0.26, { color: '#efe8d8', rz: -0.06 });
+    t.bloque('tinte', 0.05, 0.752, 0.12, 0.2, 0.012, 0.26, { color: '#fbd0e1', rz: 0.06 });
+    t.bloque('tinte', -0.15, 0.752, 0.12, 0.2, 0.012, 0.26, { color: '#fbd0e1', rz: -0.06 });
     if (i % 2 === 0)
-      t.cilindro('tinte-brillo', 0.4, 0.8, 0.2, 0.04, 0.035, 0.1, 12, { color: '#f3efe8' });
+      t.cilindro('tinte-brillo', 0.4, 0.8, 0.2, 0.04, 0.035, 0.1, 12, { color: '#fbd0e1' });
   });
-  luz(t, () => charco(t, -w / 2 + 0.3, 0.755, 0, 0.7, 0.6, '#6e5a2a'));
+  luz(t, () => charco(t, -w / 2 + 0.3, 0.755, 0, 0.7, 0.6, '#f04c8e'));
 };
 
 /** Mesa de cartas celestes: nogal, carta bajo vidrio, compás de latón y un globo celeste. */
@@ -264,11 +264,11 @@ const mesaCartas: Dibujo = (t, m, i) => {
       t.en(w / 2 - 0.22, 0.75, -d / 2 + 0.2, 0, () => {
         t.cilindro('nogal', 0, 0.015, 0, 0.08, 0.09, 0.03, 16);
         t.cilindro('laton', 0, 0.09, 0, 0.008, 0.008, 0.14, 6);
-        t.esfera('tinte-brillo', 0, 0.25, 0, 0.12, 18, 1, { color: '#1d2a44' });
+        t.esfera('tinte-brillo', 0, 0.25, 0, 0.12, 18, 1, { color: '#86d1ea' });
         t.toro('laton', 0, 0.25, 0, 0.135, 0.006, 32, { ry: 0.4 });
       });
     } else {
-      t.bloque('tinte', -w / 2 + 0.3, 0.75, -0.2, 0.22, 0.04, 0.3, { color: '#5a3a26' });
+      t.bloque('tinte', -w / 2 + 0.3, 0.75, -0.2, 0.22, 0.04, 0.3, { color: '#f04c8e' });
     }
   });
 };
@@ -284,24 +284,24 @@ const mesaMezcla: Dibujo = (t, m) => {
     t.caja('acero', 0, 0, 0, w - 0.12, 0.05, 0.42, { rx: 0.42 });
     for (let k = 0; k < 12; k++) {
       const x = -w / 2 + 0.16 + k * 0.095;
-      t.caja('tinte', x, 0.026, 0.02, 0.012, 0.004, 0.24, { rx: 0.42, color: '#0d0e10' });
+      t.caja('tinte', x, 0.026, 0.02, 0.012, 0.004, 0.24, { rx: 0.42, color: '#853267' });
       t.caja('tinte-brillo', x, 0.04 - (k % 3) * 0.02, 0.02 + (k % 3) * 0.04, 0.03, 0.02, 0.018, {
         rx: 0.42,
-        color: '#d7dade',
+        color: '#fef3f8',
       });
       t.caja('emisivo', x, 0.1, -0.15, 0.012, 0.01, 0.05, {
         rx: 0.42,
-        color: k % 5 === 4 ? '#ff4a3a' : k % 3 ? '#4fe08a' : '#f2c24b',
+        color: k % 5 === 4 ? '#f04997' : k % 3 ? '#82e0a8' : '#f4d67b',
       });
     }
   });
   encima(t, m, () => {
     for (const s of [-1, 1]) {
       t.en(s * (w / 2 - 0.16), 0.95, -d / 2 + 0.14, -s * 0.25, () => {
-        t.bloque('tinte', 0, 0, 0, 0.18, 0.28, 0.2, { color: '#151618' });
+        t.bloque('tinte', 0, 0, 0, 0.18, 0.28, 0.2, { color: '#853267' });
         t.cilindro('tinte-brillo', 0, 0.1, 0.101, 0.06, 0.06, 0.004, 16, {
           rx: PI / 2,
-          color: '#2a2b2e',
+          color: '#853267',
         });
         t.cilindro('laton', 0, 0.22, 0.101, 0.022, 0.022, 0.004, 12, { rx: PI / 2 });
       });
@@ -343,7 +343,7 @@ const sillonCuero: Dibujo = (t) => {
     [0, 0.71],
     [0.2, 0.71],
   ] as const) {
-    t.esfera('tinte', x, y, -0.163, 0.011, 6, 1, { color: '#3a1d10' });
+    t.esfera('tinte', x, y, -0.163, 0.011, 6, 1, { color: '#f04c8e' });
   }
 };
 
@@ -366,27 +366,27 @@ const mesaMarmol: Dibujo = (t, m) => {
       [1.4, -1],
     ] as const) {
       t.cilindro('tinte-brillo', x + 0.18, 0.795, s * 0.36, 0.04, 0.035, 0.09, 12, {
-        color: '#f3efe8',
+        color: '#fbd0e1',
       });
       t.cilindro('tinte-brillo', x + 0.18, 0.752, s * 0.36, 0.07, 0.07, 0.006, 16, {
-        color: '#f3efe8',
+        color: '#fbd0e1',
       });
     }
     t.en(-0.2, 0.75, 0.32, PI, () => {
-      t.bloque('tinte-brillo', 0, 0, 0, 0.34, 0.014, 0.23, { color: '#b9bcc0' });
+      t.bloque('tinte-brillo', 0, 0, 0, 0.34, 0.014, 0.23, { color: '#fad1e2' });
       t.en(0, 0.014, -0.115, 0, () => {
-        t.caja('tinte-brillo', 0, 0.11, -0.04, 0.34, 0.23, 0.01, { rx: -0.3, color: '#b9bcc0' });
+        t.caja('tinte-brillo', 0, 0.11, -0.04, 0.34, 0.23, 0.01, { rx: -0.3, color: '#fad1e2' });
         t.pieza('datos', plano(), 0, 0.11, -0.033, 0.31, 0.2, 1, { rect: DATOS.grafico, rx: -0.3 });
       });
     });
-    t.bloque('tinte', 0.5, 0.75, -0.28, 0.22, 0.02, 0.3, { color: '#1d2a44', ry: 0.2 });
+    t.bloque('tinte', 0.5, 0.75, -0.28, 0.22, 0.02, 0.3, { color: '#86d1ea', ry: 0.2 });
     // Jarrón de cerámica con ramas al centro.
-    t.cilindro('tinte-brillo', 0, 0.86, 0, 0.07, 0.09, 0.22, 16, { color: '#1b1c1e' });
+    t.cilindro('tinte-brillo', 0, 0.86, 0, 0.07, 0.09, 0.22, 16, { color: '#853267' });
     for (let k = 0; k < 5; k++) {
       t.cilindro('tinte', 0, 1.1, 0, 0.004, 0.004, 0.42, 4, {
         rz: (k - 2) * 0.16,
         rx: (k % 2) * 0.2 - 0.1,
-        color: '#5b4632',
+        color: '#f04c8e',
       });
     }
   });
@@ -400,7 +400,7 @@ const carroBar: Dibujo = (t, m) => {
       t.cilindro('laton', x, 0.47, z, 0.011, 0.011, 0.86, 8);
   }
   for (const y of [0.2, 0.6]) {
-    t.bloque('tinte-brillo', -0.05, y, 0, w - 0.2, 0.012, d - 0.04, { color: '#3a3833' });
+    t.bloque('tinte-brillo', -0.05, y, 0, w - 0.2, 0.012, d - 0.04, { color: '#853267' });
     t.bloque('laton', -0.05, y + 0.012, d / 2 - 0.025, w - 0.2, 0.03, 0.008);
     t.bloque('laton', -0.05, y + 0.012, -d / 2 + 0.025, w - 0.2, 0.03, 0.008);
   }
@@ -409,11 +409,11 @@ const carroBar: Dibujo = (t, m) => {
     t.toro('acero', -w / 2 + 0.1, 0.097, z, 0.08, 0.016, 18);
   }
   const botellas = [
-    ['#8a4a12', 0.24],
-    ['#2f4f2a', 0.22],
-    ['#cfd8d6', 0.2],
-    ['#5b1a1a', 0.19],
-    ['#d9a441', 0.23],
+    ['#f14f8f', 0.24],
+    ['#51a144', 0.22],
+    ['#fef3f8', 0.2],
+    ['#ee2b86', 0.19],
+    ['#fac3d9', 0.23],
   ] as const;
   botellas.forEach(([color, alto], k) => {
     const x = -w / 2 + 0.16 + k * 0.13;
@@ -421,13 +421,13 @@ const carroBar: Dibujo = (t, m) => {
     t.cilindro('tinte-brillo', x, 0.612 + alto / 2, z, 0.04, 0.04, alto, 12, { color });
     t.cilindro('tinte-brillo', x, 0.612 + alto + 0.04, z, 0.012, 0.018, 0.1, 8, { color });
   });
-  t.esfera('tinte-brillo', 0.42, 0.7, 0, 0.08, 14, 1, { color: '#e1e7e6' });
+  t.esfera('tinte-brillo', 0.42, 0.7, 0, 0.08, 14, 1, { color: '#fef3f8' });
   t.cilindro('laton', 0.18, 0.68, 0.1, 0.06, 0.05, 0.14, 14);
   for (let k = 0; k < 4; k++)
     t.cilindro('tinte-brillo', -0.3 + k * 0.12, 0.27, 0.06, 0.03, 0.025, 0.08, 10, {
-      color: '#dfe6e8',
+      color: '#d0edf7',
     });
-  t.bloque('tinte', 0.2, 0.232, -0.05, 0.3, 0.06, 0.2, { color: '#6e1f1c' });
+  t.bloque('tinte', 0.2, 0.232, -0.05, 0.3, 0.06, 0.2, { color: '#ee2b86' });
 };
 
 /** Pantalla grande del pipeline de ventas, enmarcada con un filete de latón. */
@@ -438,7 +438,7 @@ const pantallaPipeline: Dibujo = (t, m) => {
   t.bloque('laton', 0, 0, 0.0, w + 0.02, 0.012, 0.02);
   t.bloque('laton', 0, h - 0.012, 0.0, w + 0.02, 0.012, 0.02);
   t.pieza('datos', plano(), 0, h / 2, 0.0015, w - 0.08, h - 0.08, 1, { rect: DATOS.pipeline });
-  luz(t, () => charco(t, 0, -m.y + 0.012, 1.2, w + 0.6, 2.2, '#1d3a6a'));
+  luz(t, () => charco(t, 0, -m.y + 0.012, 1.2, w + 0.6, 2.2, '#86d1ea'));
 };
 
 /** Videowall curvo de 3 × 2: las columnas de los costados se adelantan hacia la sala. */
@@ -478,12 +478,12 @@ const videowall: Dibujo = (t, m) => {
       });
     });
   });
-  luz(t, () => charco(t, 0, -m.y + 0.012, 1.6, w + 1.2, 3.4, '#173a8a'));
+  luz(t, () => charco(t, 0, -m.y + 0.012, 1.6, w + 1.2, 3.4, '#86d1ea'));
 };
 
 // --- Contenido ---
 
-const ACENTOS_FIELTRO = ['#8e4a32', '#b88a3a', '#4d5d6e', '#a8746b'];
+const ACENTOS_FIELTRO = ['#f370a4', '#f79ec2', '#86d1ea', '#fabdd5'];
 
 /** Panel acústico de 6 × 6 losetas de fieltro en relieve, con un dibujo distinto por panel. */
 const panelAcustico: Dibujo = (t, m, i) => {
@@ -559,13 +559,13 @@ const letreroNeon: Dibujo = (t, m) => {
       const largo = Math.hypot(xb - xa, yb - ya);
       t.caja('emisivo', (xa + xb) / 2, (ya + yb) / 2, 0.01, largo + 0.02, 0.022, 0.02, {
         rz: Math.atan2(yb - ya, xb - xa),
-        color: '#ff2b3c',
+        color: '#ef3b8f',
       });
     }
   });
   luz(t, () => {
-    resplandor(t, 0, h / 2, 0.04, w + 1.2, h + 1.0, '#a8101c');
-    resplandor(t, 0, h / 2, -0.05, w + 2.4, h + 1.8, '#5a0810');
+    resplandor(t, 0, h / 2, 0.04, w + 1.2, h + 1.0, '#ee2b86');
+    resplandor(t, 0, h / 2, -0.05, w + 2.4, h + 1.8, '#ee2b86');
   });
 };
 
@@ -578,11 +578,11 @@ const aroLuz: Dibujo = (t) => {
   }
   t.cilindro('acero', 0, 1.2, 0, 0.014, 0.014, 0.8, 8);
   t.en(0, 1.62, 0, PI / 2, () => {
-    t.toro('emisivo', 0, 0, 0, 0.23, 0.022, 36, { color: '#f4f6ff' });
+    t.toro('emisivo', 0, 0, 0, 0.23, 0.022, 36, { color: '#f6fbfd' });
     t.toro('acero', 0, 0, -0.02, 0.23, 0.028, 36);
-    t.bloque('tinte', 0, -0.08, 0, 0.08, 0.16, 0.012, { color: '#111214' });
+    t.bloque('tinte', 0, -0.08, 0, 0.08, 0.16, 0.012, { color: '#853267' });
   });
-  luz(t, () => resplandor(t, -0.05, 1.62, 0, 1.4, 1.4, '#3c4250', -PI / 2));
+  luz(t, () => resplandor(t, -0.05, 1.62, 0, 1.4, 1.4, '#db9fdb', -PI / 2));
 };
 
 /** Cámara de cine sobre trípode, con piloto rojo de grabación y monitor de campo. */
@@ -594,10 +594,10 @@ const camaraTripode: Dibujo = (t) => {
   }
   t.cilindro('acero', 0, 1.3, 0, 0.03, 0.04, 0.08, 10);
   t.en(0, 1.4, 0, -PI / 2, () => {
-    t.cojin('tinte', 0, 0, -0.02, 0.14, 0.14, 0.24, 0.015, { color: '#16171a' });
-    t.cilindro('tinte', 0, 0, 0.17, 0.05, 0.055, 0.14, 16, { rx: PI / 2, color: '#0e0f11' });
+    t.cojin('tinte', 0, 0, -0.02, 0.14, 0.14, 0.24, 0.015, { color: '#853267' });
+    t.cilindro('tinte', 0, 0, 0.17, 0.05, 0.055, 0.14, 16, { rx: PI / 2, color: '#853267' });
     t.cilindro('laton', 0, 0, 0.24, 0.056, 0.056, 0.012, 16, { rx: PI / 2 });
-    t.esfera('emisivo', 0.05, 0.06, 0.1, 0.008, 6, 1, { color: '#ff2020' });
+    t.esfera('emisivo', 0.05, 0.06, 0.1, 0.008, 6, 1, { color: '#ee3189' });
     pantalla(
       t,
       0,
@@ -649,15 +649,15 @@ const librero: Dibujo = (t, m, i) => {
         const tipo = (i + b + k + lado) % 3;
         if (tipo === 0) {
           t.cilindro('tinte-brillo', cx, y + 0.11, 0, 0.05, 0.035, 0.22, 14, {
-            color: ['#e9e4da', '#b5562f', '#1b1c1e'][(b + k) % 3],
+            color: ['#fbd0e1', '#f691ba', '#853267'][(b + k) % 3],
           });
         } else if (tipo === 1) {
           t.esfera('laton', cx, y + 0.07, 0, 0.065, 14);
-          t.bloque('tinte', cx, y, 0, 0.1, 0.012, 0.1, { color: '#1b1c1e' });
+          t.bloque('tinte', cx, y, 0, 0.1, 0.012, 0.1, { color: '#853267' });
         } else {
           for (let s = 0; s < 3; s++) {
             t.bloque('tinte', cx, y + s * 0.03, 0, 0.18 - s * 0.02, 0.028, 0.24, {
-              color: ['#e7dcc6', '#6e1f1c', '#1d2a44'][s],
+              color: ['#fbd0e1', '#ee2b86', '#86d1ea'][s],
             });
           }
         }
@@ -668,7 +668,7 @@ const librero: Dibujo = (t, m, i) => {
   if (m.giro === 0) {
     t.cilindro('laton', 0, h - 0.32, d / 2 - 0.02, 0.012, 0.012, w - 0.06, 8, { rz: PI / 2 });
   }
-  luz(t, () => resplandor(t, 0, h - tapa - 0.2, d / 2 + 0.01, w, 0.5, '#3a2a12'));
+  luz(t, () => resplandor(t, 0, h - tapa - 0.2, d / 2 + 0.01, w, 0.5, '#f04c8e'));
 };
 
 /** Bóveda de acero: puerta redonda entreabierta, volante de latón y lingotes con brillo dorado. */
@@ -684,7 +684,7 @@ const boveda: Dibujo = (t, m) => {
   t.bloque('acero', 0, 0, -d / 2 + 0.06, w, h, 0.12);
   t.toro('laton', 0, cy - (cy - h / 2), d / 2 + 0.005, radio + 0.04, 0.025, 40);
   // Interior forrado de terciopelo, con baldas de lingotes.
-  t.bloque('tinte', 0, 0.12, -d / 2 + 0.13, w - 0.24, h - 0.24, 0.02, { color: '#4a1016' });
+  t.bloque('tinte', 0, 0.12, -d / 2 + 0.13, w - 0.24, h - 0.24, 0.02, { color: '#ee2b86' });
   for (const y of [0.62, 1.12]) {
     t.bloque('acero', 0, y - 0.03, -0.1, w - 0.3, 0.03, d - 0.5);
     for (let k = 0; k < 7; k++) {
@@ -693,7 +693,7 @@ const boveda: Dibujo = (t, m) => {
       t.bloque('laton', x, y + fila * 0.055, -0.15, 0.24, 0.055, 0.11);
     }
   }
-  t.caja('emisivo', 0, h - 0.3, -0.1, w - 0.6, 0.02, 0.02, { color: '#ffd68a' });
+  t.caja('emisivo', 0, h - 0.3, -0.1, w - 0.6, 0.02, 0.02, { color: '#f4d67b' });
   // Puerta entreabierta, girada sobre su bisagra.
   t.en(-radio, h / 2, d / 2, -0.42, () => {
     t.en(radio, 0, 0.12, 0, () => {
@@ -723,9 +723,9 @@ const boveda: Dibujo = (t, m) => {
     });
   });
   luz(t, () => {
-    resplandor(t, 0, h / 2, d / 2 + 0.02, 1.9, 1.9, '#a87418');
-    resplandor(t, 0, h / 2, -0.2, 1.4, 1.4, '#d49a2a');
-    charco(t, 0, 0.01, d / 2 + 0.8, 2.2, 1.6, '#6a4a12');
+    resplandor(t, 0, h / 2, d / 2 + 0.02, 1.9, 1.9, '#f370a4');
+    resplandor(t, 0, h / 2, -0.2, 1.4, 1.4, '#f8a9c9');
+    charco(t, 0, 0.01, d / 2 + 0.8, 2.2, 1.6, '#f04c8e');
   });
 };
 
@@ -751,7 +751,7 @@ const telescopio: Dibujo = (t) => {
       t.cilindro('laton', 0, 0, 0, 0.055, 0.05, 0.86, 20);
       t.cilindro('laton', 0, 0.38, 0, 0.068, 0.068, 0.14, 20);
       t.cilindro('acero', 0, -0.43, 0, 0.03, 0.03, 0.05, 10);
-      t.cilindro('tinte', 0, -0.48, 0, 0.018, 0.022, 0.07, 10, { color: '#1a1b1e' });
+      t.cilindro('tinte', 0, -0.48, 0, 0.018, 0.022, 0.07, 10, { color: '#853267' });
       t.cilindro('laton', 0.08, 0.15, 0, 0.018, 0.018, 0.3, 10);
       t.toro('acero', 0, 0.2, 0, 0.058, 0.01, 20, { rx: PI / 2 });
       t.toro('acero', 0, -0.25, 0, 0.058, 0.01, 20, { rx: PI / 2 });
@@ -776,16 +776,16 @@ const maquinaGimnasio: Dibujo = (t, m) => {
   t.bloque('laton', 0.17, 0.06, -d / 2 + 0.1, 0.012, 0.54, 0.02);
   for (const x of [-0.11, 0.11])
     t.cilindro('tinte-brillo', x, h / 2, -d / 2 + 0.1, 0.012, 0.012, h - 0.1, 8, {
-      color: '#c9ccd0',
+      color: '#fef3f8',
     });
   t.cilindro('acero', 0, h - 0.14, -d / 2 + 0.2, 0.06, 0.06, 0.04, 16, { rx: PI / 2 });
   t.cilindro('tinte', 0, h - 0.47, -d / 2 + 0.28, 0.005, 0.005, 0.6, 4, {
-    color: '#121314',
+    color: '#853267',
     rx: 0.25,
   });
   t.cilindro('tinte-brillo', 0, h - 0.78, -d / 2 + 0.36, 0.014, 0.014, 0.6, 8, {
     rz: PI / 2,
-    color: '#c9ccd0',
+    color: '#fef3f8',
   });
   // Banco: poste, asiento y respaldo tapizados.
   t.bloque('acero', 0, 0, 0.18, 0.07, 0.42, 0.07);
@@ -822,12 +822,12 @@ const rackMancuernas: Dibujo = (t, m) => {
       const r = 0.045 + k * 0.006;
       t.cilindro('tinte-brillo', x, y + 0.03 + r, z, 0.013, 0.013, 0.2, 8, {
         rx: PI / 2,
-        color: '#c9ccd0',
+        color: '#fef3f8',
       });
       for (const s of [-1, 1]) {
         t.cilindro('tinte', x, y + 0.03 + r, z + s * 0.11, r, r, 0.05, 6, {
           rx: PI / 2,
-          color: '#1a1b1d',
+          color: '#853267',
         });
       }
     }
@@ -863,7 +863,7 @@ const chimenea: Dibujo = (t, m) => {
       6,
       0.6,
       {
-        color: k % 3 ? '#2a2826' : '#ff6a1a',
+        color: k % 3 ? '#853267' : '#f4d67b',
       },
     );
   }
@@ -873,12 +873,12 @@ const chimenea: Dibujo = (t, m) => {
   ] as const) {
     t.pieza('fuego', plano(), 0, y0 + 0.02 + alto / 2, z, hueco - 0.1, alto, 1, {
       rect: TODO,
-      color: '#ffffff',
+      color: '#fef3f8',
     });
   }
   luz(t, () => {
-    resplandor(t, 0, (y0 + y1) / 2 + 0.05, d / 2 + 0.02, hueco + 0.8, 1.3, '#b0501a');
-    charco(t, 0, 0.012, d / 2 + 1.0, w + 0.8, 2.6, '#7a3a10');
+    resplandor(t, 0, (y0 + y1) / 2 + 0.05, d / 2 + 0.02, hueco + 0.8, 1.3, '#f479aa');
+    charco(t, 0, 0.012, d / 2 + 1.0, w + 0.8, 2.6, '#f04c8e');
   });
 };
 
@@ -886,8 +886,8 @@ const chimenea: Dibujo = (t, m) => {
 const sofaModular: Dibujo = (t, m) => {
   const { arriba, abajo } = ASIENTOS['sofa-modular'];
   const { ancho: w, fondo: d } = m;
-  const tela = '#e6dfd2';
-  t.bloque('tinte', 0, 0, 0, w - 0.1, abajo, d - 0.1, { color: '#2a2622' });
+  const tela = '#fbd0e1';
+  t.bloque('tinte', 0, 0, 0, w - 0.1, abajo, d - 0.1, { color: '#853267' });
   const base = arriba - 0.14;
   t.cojin('tinte', 0, (abajo + base) / 2, 0, w, base - abajo, d, 0.04, { color: tela });
   const brazo = 0.16;
@@ -919,7 +919,7 @@ const sofaModular: Dibujo = (t, m) => {
   });
   // Manta doblada sobre un brazo.
   t.cojin('tinte', w / 2 - brazo / 2, 0.6, 0.05, brazo + 0.04, 0.035, 0.5, 0.012, {
-    color: '#9a5a3a',
+    color: '#f582b0',
   });
 };
 
@@ -929,11 +929,11 @@ const mesaCentro: Dibujo = (t, m) => {
   t.bloque('marmol', 0, 0, 0, w - 0.36, h - 0.07, d - 0.3);
   t.bloque('marmol', 0, h - 0.07, 0, w, 0.07, d);
   encima(t, m, () => {
-    t.bloque('tinte', -0.35, h, 0.05, 0.32, 0.03, 0.24, { color: '#e7dcc6', ry: 0.1 });
-    t.bloque('tinte', -0.35, h + 0.03, 0.05, 0.28, 0.025, 0.22, { color: '#1d2a44', ry: 0.2 });
-    t.cilindro('tinte-brillo', 0.25, h + 0.05, -0.1, 0.13, 0.07, 0.1, 18, { color: '#1b1c1e' });
-    t.cilindro('tinte', 0.3, h + 0.05, 0.22, 0.03, 0.03, 0.1, 10, { color: '#efe8d8' });
-    t.cilindro('emisivo', 0.3, h + 0.11, 0.22, 0.004, 0.006, 0.02, 6, { color: '#ffd28a' });
+    t.bloque('tinte', -0.35, h, 0.05, 0.32, 0.03, 0.24, { color: '#fbd0e1', ry: 0.1 });
+    t.bloque('tinte', -0.35, h + 0.03, 0.05, 0.28, 0.025, 0.22, { color: '#86d1ea', ry: 0.2 });
+    t.cilindro('tinte-brillo', 0.25, h + 0.05, -0.1, 0.13, 0.07, 0.1, 18, { color: '#853267' });
+    t.cilindro('tinte', 0.3, h + 0.05, 0.22, 0.03, 0.03, 0.1, 10, { color: '#fbd0e1' });
+    t.cilindro('emisivo', 0.3, h + 0.11, 0.22, 0.004, 0.006, 0.02, 6, { color: '#f4d67b' });
   });
 };
 
@@ -945,7 +945,7 @@ const islaCocina: Dibujo = (t, m) => {
   t.bloque('marmol', 0, h - 0.05, 0, w, 0.05, d);
   for (const s of [-1, 1]) t.bloque('marmol', s * (w / 2 - 0.025), 0, 0, 0.05, h - 0.05, d);
   t.bloque('nogal', 0, 0.08, -0.12, w - 0.1, h - 0.13, d - 0.36);
-  t.bloque('tinte', 0, 0, -0.12, w - 0.14, 0.08, d - 0.42, { color: '#1b1a18' });
+  t.bloque('tinte', 0, 0, -0.12, w - 0.14, 0.08, d - 0.42, { color: '#853267' });
   for (let k = 0; k < 4; k++)
     t.bloque('laton', -w / 2 + 0.45 + k * 0.7, h - 0.2, -d / 2 - 0.005 + 0.06, 0.2, 0.012, 0.012);
   encima(t, m, () => {
@@ -960,23 +960,23 @@ const islaCocina: Dibujo = (t, m) => {
         10,
         1,
         {
-          color: k % 2 ? '#e8c43a' : '#d9b02a',
+          color: k % 2 ? '#f4d67b' : '#f8aecc',
         },
       );
     }
-    t.cilindro('tinte-brillo', 0.5, h + 0.14, -0.15, 0.06, 0.08, 0.28, 16, { color: '#e9e4da' });
+    t.cilindro('tinte-brillo', 0.5, h + 0.14, -0.15, 0.06, 0.08, 0.28, 16, { color: '#fbd0e1' });
     for (let k = 0; k < 6; k++) {
       t.cilindro('tinte', 0.5, h + 0.44, -0.15, 0.003, 0.003, 0.36, 4, {
         rz: (k - 2.5) * 0.14,
         rx: (k % 3) * 0.12 - 0.12,
-        color: '#5b6b3a',
+        color: '#83a045',
       });
       t.esfera('tinte', 0.5 + (k - 2.5) * 0.05, h + 0.6, -0.15 + ((k % 3) - 1) * 0.04, 0.03, 6, 1, {
-        color: '#f1ece2',
+        color: '#fbd0e1',
       });
     }
     for (const x of [-0.05, 0.12])
-      t.cilindro('tinte-brillo', x, h + 0.045, 0.3, 0.04, 0.035, 0.09, 12, { color: '#f3efe8' });
+      t.cilindro('tinte-brillo', x, h + 0.045, 0.3, 0.04, 0.035, 0.09, 12, { color: '#fbd0e1' });
   });
 };
 
@@ -998,12 +998,12 @@ const taburete: Dibujo = (t, m) => {
 /** Muebles bajos de cocina: frentes de nogal con tiradores de latón, cubierta de mármol, lavaplatos y encimera. */
 const muebleCocina: Dibujo = (t, m) => {
   const { ancho: w, fondo: d, alto: h } = m;
-  t.bloque('tinte', 0, 0, -0.03, w - 0.04, 0.1, d - 0.08, { color: '#1b1a18' });
+  t.bloque('tinte', 0, 0, -0.03, w - 0.04, 0.1, d - 0.08, { color: '#853267' });
   t.bloque('nogal', 0, 0.1, -0.01, w, h - 0.15, d - 0.04);
   const puertas = Math.round(w / 0.6);
   for (let k = 1; k < puertas; k++) {
     const x = -w / 2 + (w * k) / puertas;
-    t.bloque('tinte', x, 0.12, d / 2 - 0.028, 0.006, h - 0.19, 0.004, { color: '#2a1a10' });
+    t.bloque('tinte', x, 0.12, d / 2 - 0.028, 0.006, h - 0.19, 0.004, { color: '#f04c8e' });
   }
   for (let k = 0; k < puertas; k++) {
     const x = -w / 2 + (w * (k + 0.5)) / puertas;
@@ -1016,27 +1016,27 @@ const muebleCocina: Dibujo = (t, m) => {
       t.cilindro('laton', 0, 0.16, 0, 0.016, 0.02, 0.32, 10);
       t.toro('laton', 0, 0.32, 0.07, 0.07, 0.012, 14, { ry: PI / 2 });
     });
-    t.bloque('tinte-brillo', 1.6, h, 0.0, 0.76, 0.006, 0.5, { color: '#0c0d0f' });
+    t.bloque('tinte-brillo', 1.6, h, 0.0, 0.76, 0.006, 0.5, { color: '#853267' });
     for (const [x, z] of [
       [1.42, -0.1],
       [1.78, -0.1],
       [1.42, 0.12],
       [1.78, 0.12],
     ] as const) {
-      t.toro('tinte', x, h + 0.008, z, 0.07, 0.004, 20, { rx: PI / 2, color: '#3a3c40' });
+      t.toro('tinte', x, h + 0.008, z, 0.07, 0.004, 20, { rx: PI / 2, color: '#db9fdb' });
     }
     t.bloque('nogal', -0.3, h, 0.05, 0.5, 0.03, 0.32);
     for (const [x, color] of [
-      [0.4, '#4c5b2a'],
-      [0.55, '#9a6a1e'],
+      [0.4, '#88a93d'],
+      [0.55, '#f368a0'],
     ] as const) {
       t.cilindro('tinte-brillo', x, h + 0.13, -0.18, 0.035, 0.035, 0.26, 12, { color });
     }
     for (let k = 0; k < 3; k++) {
       t.cilindro('tinte-brillo', -3 + k * 0.22, h + 0.06, -0.15, 0.06, 0.05, 0.12, 14, {
-        color: '#d9d2c4',
+        color: '#fbd0e1',
       });
-      t.esfera('tinte', -3 + k * 0.22, h + 0.16, -0.15, 0.07, 8, 0.8, { color: '#4f6b34' });
+      t.esfera('tinte', -3 + k * 0.22, h + 0.16, -0.15, 0.07, 8, 0.8, { color: '#72a640' });
     }
   });
 };
@@ -1044,7 +1044,7 @@ const muebleCocina: Dibujo = (t, m) => {
 /** Barra de café: frente acanalado de nogal, cubierta de mármol, máquina de espresso de latón. */
 const barraCafe: Dibujo = (t, m) => {
   const { ancho: w, fondo: d, alto: h } = m;
-  t.bloque('tinte', 0, 0, -0.03, w - 0.04, 0.1, d - 0.1, { color: '#1b1a18' });
+  t.bloque('tinte', 0, 0, -0.03, w - 0.04, 0.1, d - 0.1, { color: '#853267' });
   t.bloque('nogal', 0, 0.1, -0.02, w, h - 0.15, d - 0.06);
   for (let x = -w / 2 + 0.03; x < w / 2 - 0.02; x += 0.06) {
     t.cilindro('nogal', x, 0.1 + (h - 0.15) / 2, d / 2 - 0.05, 0.022, 0.022, h - 0.15, 6);
@@ -1056,36 +1056,36 @@ const barraCafe: Dibujo = (t, m) => {
       t.bloque('acero', 0, 0.42, -0.02, 0.66, 0.02, 0.3);
       for (let k = 0; k < 5; k++)
         t.cilindro('tinte-brillo', -0.24 + k * 0.12, 0.47, -0.05, 0.035, 0.03, 0.06, 10, {
-          color: '#f3efe8',
+          color: '#fbd0e1',
         });
       for (const x of [-0.16, 0.16]) {
         t.cilindro('acero', x, 0.27, 0.19, 0.045, 0.05, 0.06, 14);
-        t.caja('tinte', x, 0.23, 0.27, 0.03, 0.03, 0.12, { color: '#151515' });
-        t.cilindro('tinte-brillo', x, 0.05, 0.19, 0.035, 0.03, 0.07, 10, { color: '#f3efe8' });
+        t.caja('tinte', x, 0.23, 0.27, 0.03, 0.03, 0.12, { color: '#853267' });
+        t.cilindro('tinte-brillo', x, 0.05, 0.19, 0.035, 0.03, 0.07, 10, { color: '#fbd0e1' });
       }
       for (const x of [-0.1, 0.1]) {
         t.cilindro('tinte-brillo', x, 0.36, 0.162, 0.04, 0.04, 0.01, 16, {
           rx: PI / 2,
-          color: '#f5f2ea',
+          color: '#fbd0e1',
         });
       }
       t.cilindro('acero', 0.31, 0.2, 0.18, 0.008, 0.008, 0.24, 6, { rz: 0.2 });
       t.bloque('acero', 0, 0, 0.19, 0.6, 0.02, 0.12);
     });
     t.en(-0.35, h, -0.08, 0, () => {
-      t.bloque('tinte', 0, 0, 0, 0.18, 0.32, 0.22, { color: '#18191b' });
-      t.cilindro('tinte-brillo', 0, 0.42, 0, 0.07, 0.04, 0.2, 14, { color: '#5a3a20' });
+      t.bloque('tinte', 0, 0, 0, 0.18, 0.32, 0.22, { color: '#853267' });
+      t.cilindro('tinte-brillo', 0, 0.42, 0, 0.07, 0.04, 0.2, 14, { color: '#f04c8e' });
     });
     for (let k = 0; k < 3; k++) {
       t.cilindro('tinte-brillo', -0.9 - k * 0.16, h + 0.1, -0.12, 0.055, 0.055, 0.2, 14, {
-        color: '#c9b79a',
+        color: '#fbd0e1',
       });
       t.cilindro('laton', -0.9 - k * 0.16, h + 0.205, -0.12, 0.057, 0.057, 0.015, 14);
     }
-    t.cilindro('tinte-brillo', -1.6, h + 0.12, 0, 0.16, 0.1, 0.24, 20, { color: '#e9e4da' });
-    t.esfera('tinte', -1.6, h + 0.26, 0, 0.12, 12, 0.5, { color: '#b77a3a' });
+    t.cilindro('tinte-brillo', -1.6, h + 0.12, 0, 0.16, 0.1, 0.24, 20, { color: '#fbd0e1' });
+    t.esfera('tinte', -1.6, h + 0.26, 0, 0.12, 12, 0.5, { color: '#f79dc1' });
   });
-  luz(t, () => charco(t, 0, h + 0.004, 0, w * 0.9, d * 1.4, '#6e5530'));
+  luz(t, () => charco(t, 0, h + 0.004, 0, w * 0.9, d * 1.4, '#f15091'));
 };
 
 // --- Terraza ---
@@ -1103,7 +1103,7 @@ const reposera: Dibujo = (t, m) => {
     t.cilindro('acero', s * (w / 2 - 0.016), 0.07, -d / 2 + 0.1, 0.07, 0.07, 0.03, 16, {
       rz: PI / 2,
     });
-  t.cojin('tinte', 0, 0.29, 0.28, w - 0.12, 0.07, d - 0.72, 0.03, { color: '#ece6da' });
+  t.cojin('tinte', 0, 0.29, 0.28, w - 0.12, 0.07, d - 0.72, 0.03, { color: '#fbd0e1' });
   // Respaldo levantado desde la bisagra, hacia la cabecera (-z).
   t.en(
     0,
@@ -1112,11 +1112,11 @@ const reposera: Dibujo = (t, m) => {
     0,
     () => {
       t.bloque('deck', 0, 0, -0.3, w - 0.1, 0.03, 0.6);
-      t.cojin('tinte', 0, 0.06, -0.3, w - 0.12, 0.07, 0.6, 0.03, { color: '#ece6da' });
+      t.cojin('tinte', 0, 0.06, -0.3, w - 0.12, 0.07, 0.6, 0.03, { color: '#fbd0e1' });
     },
     0.55,
   );
-  t.bloque('tinte', 0, 0.33, 0.6, w - 0.2, 0.04, 0.4, { color: '#c9b79a' });
+  t.bloque('tinte', 0, 0.33, 0.6, w - 0.2, 0.04, 0.4, { color: '#fbd0e1' });
 };
 
 const DIBUJOS: Record<string, Dibujo> = {

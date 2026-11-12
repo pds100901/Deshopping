@@ -218,7 +218,7 @@ function cuadro(
         z,
         w * 1.2,
         h * 0.9,
-        '#4a3418',
+        '#f04c8e',
         ry,
       ),
     );
@@ -253,14 +253,14 @@ function gimnasio(t: Taller): void {
   const a = ambienteDe('gimnasio');
   for (const c of caras('gimnasio')) {
     enCara(t, c, () => {
-      liso(t, c, 'tinte', 0.02, '#2a2c2f');
-      listones(t, c, 'tinte', 0.12, 0.05, 0.03, 0.02, '#3a3d41');
+      liso(t, c, 'tinte', 0.02, '#853267');
+      listones(t, c, 'tinte', 0.12, 0.05, 0.03, 0.02, '#db9fdb');
     });
   }
   for (let x = a.x0 + 0.5; x < a.x1; x += 1) {
     for (let z = a.z0 + 0.5; z < a.z1; z += 1) {
       const par = (Math.floor(x) + Math.floor(z)) % 2 === 0;
-      t.bloque('tinte', x, a.y, z, 0.99, 0.012, 0.99, { color: par ? '#1d1e20' : '#232427' });
+      t.bloque('tinte', x, a.y, z, 0.99, 0.012, 0.99, { color: par ? '#853267' : '#853267' });
     }
   }
   // Mueble bajo de nogal junto al muro oeste: pesas rusas arriba, esterillas enrolladas al lado.
@@ -269,16 +269,16 @@ function gimnasio(t: Taller): void {
   t.bloque('laton', x + 0.2, a.y + 0.2, (z0 + z1) / 2, 0.006, 0.012, z1 - z0 - 0.1);
   [0.11, 0.13, 0.15, 0.17].forEach((r, k) => {
     const z = z0 + 0.22 + k * 0.38;
-    t.esfera('tinte-brillo', x, a.y + 0.42 + r, z, r, 12, 0.95, { color: '#1b1c1e' });
+    t.esfera('tinte-brillo', x, a.y + 0.42 + r, z, r, 12, 0.95, { color: '#853267' });
     t.toro('acero', x, a.y + 0.42 + r * 1.9, z, r * 0.6, 0.016, 14, { ry: Math.PI / 2 });
   });
   for (const [dz, color] of [
-    [-0.12, '#b5562f'],
-    [0.12, '#6b6d3c'],
+    [-0.12, '#f691ba'],
+    [0.12, '#9c9f46'],
   ] as const) {
     t.cilindro('tinte', x, a.y + 0.33, z1 + 0.3 + dz, 0.07, 0.07, 0.62, 14, { color });
   }
-  luz(t, () => charco(t, -14.4, a.y + 0.02, -0.9, 3.2, 4.4, '#2e3442'));
+  luz(t, () => charco(t, -14.4, a.y + 0.02, -0.9, 3.2, 4.4, '#86d1ea'));
 }
 
 /** Living: pecho de hormigón de la chimenea hasta el cielo, listones de nogal y alfombra de lana. */
@@ -287,7 +287,7 @@ function living(t: Taller): void {
   const chimenea = plano.muebles.find((m) => m.tipo === 'chimenea');
   for (const c of caras('living')) {
     enCara(t, c, () => {
-      liso(t, c, 'tinte', 0.02, '#3b2a1f');
+      liso(t, c, 'tinte', 0.02, '#f04c8e');
       listones(t, c, 'nogal', 0.09, 0.055, 0.035, 0.02);
       if (c.lado === 'oeste' && chimenea) {
         const h = chimenea.ancho / 2 + 0.1;
@@ -297,7 +297,7 @@ function living(t: Taller): void {
   }
   const este = cara('living', 'este')[0];
   if (este) cuadro(t, este, -0.5, 1.75, 1.5, 1.5, LAMINA.cuadrado);
-  alfombra(t, a, -9.35, -5.95, -2.5, 1.5, '#e6ddcb', '#b9a98d', '#cfc3ad');
+  alfombra(t, a, -9.35, -5.95, -2.5, 1.5, '#fbd0e1', '#fbd0e1', '#fbd0e1');
 }
 
 /** Cocina: muros de mármol y repisas de nogal con tazas y frascos sobre la barra de café. */
@@ -313,11 +313,11 @@ function cocina(t: Taller): void {
             const x = c.x + c.dir * 0.15;
             if (k % 3 === 2) {
               t.cilindro('tinte-brillo', x, c.ambiente.y + y + 0.13, z, 0.05, 0.05, 0.18, 12, {
-                color: '#c9b79a',
+                color: '#fbd0e1',
               });
             } else {
               t.cilindro('tinte-brillo', x, c.ambiente.y + y + 0.08, z, 0.045, 0.04, 0.08, 12, {
-                color: y > 2 ? '#2f4a3a' : '#f3efe8',
+                color: y > 2 ? '#4e986c' : '#fbd0e1',
               });
             }
           }
@@ -336,13 +336,13 @@ function despensa(t: Taller, c: Cara): void {
   const [z0, z1] = [c.z0 + 0.05, 1.6];
   const fondo = 0.6;
   const frente = 0.025 + fondo;
-  contra(t, c, 'tinte', z0, z1, 0, 0.1, 0.025, fondo - 0.05, '#1b1a18');
+  contra(t, c, 'tinte', z0, z1, 0, 0.1, 0.025, fondo - 0.05, '#853267');
   contra(t, c, 'nogal', z0, z1, 0.1, 2.7, 0.025, fondo);
   const puertas = Math.round((z1 - z0) / 0.6);
   const paso = (z1 - z0) / puertas;
   for (let k = 0; k < puertas; k++) {
     const za = z0 + k * paso;
-    if (k > 0) contra(t, c, 'tinte', za - 0.003, za + 0.003, 0.12, 2.68, frente, 0.003, '#2a1a10');
+    if (k > 0) contra(t, c, 'tinte', za - 0.003, za + 0.003, 0.12, 2.68, frente, 0.003, '#f04c8e');
     if (k === 2 || k === 6) continue;
     const zt = za + (k % 2 ? 0.06 : paso - 0.06);
     contra(t, c, 'laton', zt - 0.008, zt + 0.008, 0.95, 1.75, frente, 0.025);
@@ -360,7 +360,7 @@ function despensa(t: Taller, c: Cara): void {
       y + 0.55,
       frente,
       0.006,
-      '#0c0d0f',
+      '#853267',
     );
     contra(
       t,
@@ -386,7 +386,7 @@ function despensa(t: Taller, c: Cara): void {
       1.9,
       frente - 0.003,
       0.004,
-      '#2a1a10',
+      '#f04c8e',
     );
     contra(
       t,
@@ -398,17 +398,17 @@ function despensa(t: Taller, c: Cara): void {
       1.875,
       frente,
       0.01,
-      '#ffd9a0',
+      '#f4d67b',
     );
     contra(t, c, 'marmol', nicho + 0.04, nicho + paso - 0.04, 1.36, 1.38, frente, 0.2);
     for (let k = 0; k < 3; k++) {
       const z = nicho + 0.15 + k * 0.15;
       const x = c.x + c.dir * (frente + 0.1);
       t.cilindro('tinte-brillo', x, c.ambiente.y + 1.08, z, 0.05, 0.05, 0.16, 12, {
-        color: '#c9b79a',
+        color: '#fbd0e1',
       });
       t.cilindro('tinte-brillo', x, c.ambiente.y + 1.46, z, 0.045, 0.04, 0.16, 12, {
-        color: k === 1 ? '#2f4a3a' : '#e9e4da',
+        color: k === 1 ? '#4e986c' : '#fbd0e1',
       });
     }
   }
@@ -425,7 +425,7 @@ function finanzas(t: Taller): void {
   }
   const este = cara('finanzas', 'este')[0];
   if (este) cuadro(t, este, -3.25, 1.7, 0.6, 1.2, LAMINA.vertical1);
-  alfombra(t, a, -13.6, -6.2, -3.05, 1.55, '#6b1e1e', '#1f2a44', '#b8893a');
+  alfombra(t, a, -13.6, -6.2, -3.05, 1.55, '#ee2b86', '#86d1ea', '#f79ec2');
   // Escalera corredera de nogal apoyada en el riel de los libreros del fondo.
   const libreros = plano.muebles.filter((m) => m.tipo === 'librero' && m.giro === 0);
   const medio = libreros[1];
@@ -460,21 +460,21 @@ function ventas(t: Taller): void {
   }
   const oeste = cara('ventas', 'oeste')[0];
   if (oeste) cuadro(t, oeste, -3.25, 1.75, 0.6, 1.2, LAMINA.vertical2);
-  alfombra(t, a, 7.0, 13.0, -2.75, 1.75, '#7e3a24', '#e6dccb', '#c9a25a');
+  alfombra(t, a, 7.0, 13.0, -2.75, 1.75, '#f15493', '#fbd0e1', '#fbcbde');
 }
 
 /** Desarrollo: tinta azul noche con una línea de luz fría y el resplandor del videowall. */
 function desarrollo(t: Taller): void {
   for (const c of caras('desarrollo')) {
     enCara(t, c, () => {
-      liso(t, c, 'tinte', 0.02, '#151b27');
-      listones(t, c, 'tinte', 0.6, 0.012, 0.012, 0.02, '#1f2738');
-      contra(t, c, 'emisivo', c.z0, c.vano ? c.vano[0] : c.z1, 2.9, 2.915, 0.03, 0.012, '#3f7cff');
-      contra(t, c, 'emisivo', c.z0, c.vano ? c.vano[0] : c.z1, 0.12, 0.13, 0.03, 0.012, '#2a58c8');
+      liso(t, c, 'tinte', 0.02, '#86d1ea');
+      listones(t, c, 'tinte', 0.6, 0.012, 0.012, 0.02, '#86d1ea');
+      contra(t, c, 'emisivo', c.z0, c.vano ? c.vano[0] : c.z1, 2.9, 2.915, 0.03, 0.012, '#86d1ea');
+      contra(t, c, 'emisivo', c.z0, c.vano ? c.vano[0] : c.z1, 0.12, 0.13, 0.03, 0.012, '#86d1ea');
     });
   }
   const a = ambienteDe('desarrollo');
-  alfombra(t, a, -15.4, -5.2, -3.2, 1.6, '#23272e', '#1a1d22', '#2c3a5c');
+  alfombra(t, a, -15.4, -5.2, -3.2, 1.6, '#853267', '#853267', '#86d1ea');
 }
 
 /** Contenido: paños de fieltro antracita en retícula, tiras de luz fría y alfombra acústica. */
@@ -499,12 +499,12 @@ function contenido(t: Taller): void {
           }
         }
       }
-      if (c.lado === 'oeste') contra(t, c, 'emisivo', -3.6, 1.8, 3.3, 3.32, 0.07, 0.012, '#e8f0ff');
+      if (c.lado === 'oeste') contra(t, c, 'emisivo', -3.6, 1.8, 3.3, 3.32, 0.07, 0.012, '#ebf8fc');
     });
   }
   const a = ambienteDe('contenido');
-  alfombra(t, a, 5.2, 13.2, -3.1, 1.5, '#2b2d31', '#202226', '#5a3a2c');
-  luz(t, () => charco(t, 14.2, a.y + 0.02, -0.7, 2.6, 3, '#28303e'));
+  alfombra(t, a, 5.2, 13.2, -3.1, 1.5, '#853267', '#853267', '#f04c8e');
+  luz(t, () => charco(t, 14.2, a.y + 0.02, -0.7, 2.6, 3, '#86d1ea'));
 }
 
 /** Observatorio: carta estelar mural con marco de latón, nogal enfrente y alfombra redonda. */
@@ -539,9 +539,9 @@ function observatorio(t: Taller): void {
       }
     });
   }
-  t.cilindro('tinte', -0.6, a.y + 0.006, -2.0, 1.9, 1.9, 0.012, 40, { color: '#1d2a44' });
-  t.cilindro('tinte', -0.6, a.y + 0.013, -2.0, 1.75, 1.75, 0.002, 40, { color: '#c9a25a' });
-  t.cilindro('tinte', -0.6, a.y + 0.014, -2.0, 1.7, 1.7, 0.002, 40, { color: '#22325a' });
+  t.cilindro('tinte', -0.6, a.y + 0.006, -2.0, 1.9, 1.9, 0.012, 40, { color: '#86d1ea' });
+  t.cilindro('tinte', -0.6, a.y + 0.013, -2.0, 1.75, 1.75, 0.002, 40, { color: '#fbcbde' });
+  t.cilindro('tinte', -0.6, a.y + 0.014, -2.0, 1.7, 1.7, 0.002, 40, { color: '#86d1ea' });
 }
 
 /** Todos los revestimientos de la casa. */

@@ -5,7 +5,8 @@ pedidos, compras en SHEIN y Temu, contenido, finanzas y agenda. Jules, la mano d
 el trabajo. Cada agente abre el artefacto de claude.ai con el que trabaja.
 
 Está hecha sobre «Oficina de Jules», de @elkis.dev (React Three Fiber), adaptada a la marca: rosados,
-verde salvia, Playfair Display y Poppins.
+verde salvia, Playfair Display y Poppins. La casa tiene un estilo original de casa de muñecas de ensueño:
+estructura rosada, pisos pastel, muebles blancos y fucsia, cúpula fucsia y cielo celeste con horizonte rosado.
 
 ## Requisitos
 
@@ -71,6 +72,17 @@ Los enlaces a los artefactos solo abren para quien tiene acceso a cada uno en cl
 
 Los agentes **no leen ni cambian los artefactos**: el enlace los abre en otra pestaña. Los nombres, las
 tareas y los estados de arriba son de ejemplo, no datos en vivo de la tienda.
+
+## Dónde ver qué hace cada agente
+
+- **Botón «Equipo»** (arriba a la izquierda): la lista de los 19 por área, con su estado y su tarea.
+  El número rosado dice cuántos esperan tu decisión. Tocar a uno lo enfoca en la casa y abre su panel.
+- **Tocar a un agente en la casa**: abre su panel con su estado, su tarea, su artefacto y el campo
+  para darle órdenes.
+- **Burbujas sobre la cabeza**: «…» trabajando, «!» esperando tu decisión.
+
+Lo que muestran es de ejemplo y cambia con las órdenes que les das en la sesión: los agentes no hacen
+trabajo real ni leen los artefactos.
 
 ## Controles
 

@@ -85,19 +85,19 @@ const NOCHE = tono({
   agua: '#041c22',
 });
 /**
- * Mediodía: cielo azul profundo (no lavado), sol neutro y fuerte y un relleno frío y bajo,
- * para que la sombra se lea azulada y con peso frente a lo asoleado.
+ * Mediodía de ensueño: cielo celeste con horizonte rosado, sol claro y un relleno rosado desde
+ * el suelo, para que la casa de muñecas se vea luminosa y sin sombras duras.
  */
 const DIA = tono({
-  cenit: '#2a64b4',
-  horizonte: '#b7d1e8',
-  valle: '#7d8c66',
-  sol: '#fff1dc',
-  hemiCielo: '#a9c4e8',
-  hemiSuelo: '#6e604c',
-  cerca: '#4b5d57',
-  lejos: '#8aa3bd',
-  agua: '#0d5d6c',
+  cenit: '#4aa8f0',
+  horizonte: '#ffd3e6',
+  valle: '#9fce8a',
+  sol: '#fff4e6',
+  hemiCielo: '#c9dcff',
+  hemiSuelo: '#f2b8cf',
+  cerca: '#7fae8a',
+  lejos: '#d9a9d6',
+  agua: '#19b9cf',
 });
 /**
  * Hora dorada: sol naranja intenso y bajo, sombras violeta, horizonte ámbar, cenit violeta y

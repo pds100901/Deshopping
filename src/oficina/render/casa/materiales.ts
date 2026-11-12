@@ -93,9 +93,9 @@ function marmolVeteado(): CanvasTexture | null {
   const ctx = lienzo.getContext('2d');
   if (!ctx) return null;
   const fondo = ctx.createLinearGradient(0, 0, lado, lado);
-  fondo.addColorStop(0, '#f3f1ec');
-  fondo.addColorStop(0.5, '#ebe8e2');
-  fondo.addColorStop(1, '#f1eee8');
+  fondo.addColorStop(0, '#fff6fa');
+  fondo.addColorStop(0.5, '#ffeef5');
+  fondo.addColorStop(1, '#fff4f8');
   ctx.fillStyle = fondo;
   ctx.fillRect(0, 0, lado, lado);
   // Pseudoazar determinista: la misma placa en cada carga.
@@ -125,14 +125,14 @@ function marmolVeteado(): CanvasTexture | null {
   };
   for (let i = 0; i < 5; i++) {
     const s = semilla;
-    veta(30, 0.07, '#8d8a86');
+    veta(30, 0.07, '#f3b6cf');
     semilla = s;
-    veta(10, 0.2, '#7d7a76');
+    veta(10, 0.2, '#ec9cc0');
     semilla = s;
-    veta(3, 0.7, '#55524f');
+    veta(3, 0.7, '#d9799f');
   }
-  for (let i = 0; i < 9; i++) veta(1.6, 0.4, '#8e8a84');
-  veta(4, 0.5, '#b08c58');
+  for (let i = 0; i < 9; i++) veta(1.6, 0.4, '#f0a9c6');
+  veta(4, 0.5, '#e6c56b');
   ctx.globalAlpha = 1;
   ctx.strokeStyle = 'rgba(150,146,140,0.55)';
   ctx.lineWidth = 3;
@@ -225,21 +225,19 @@ float fbmEst(vec2 p) { return 0.5 * ruidoEst(p) + 0.25 * ruidoEst(p * 2.03) + 0.
 
 const CREAR: Record<ClaveMaterial, () => Material> = {
   hormigon: () =>
-    conMapas(estandar('#a9a7a2', 0.85), {
-      color: new URL('./texturas/hormigon.webp', import.meta.url).href,
+    conMapas(estandar('#f7a8c9', 0.8), {
       rugosidad: new URL('./texturas/hormigon-rugosidad.webp', import.meta.url).href,
       metros: 2.4,
-      tinte: '#d9d6d2',
+      tinte: '#ffb3d3',
     }),
   pulido: () =>
-    conMapas(estandar('#9d9b97', 0.42), {
-      color: new URL('./texturas/hormigon.webp', import.meta.url).href,
+    conMapas(estandar('#ffd0e2', 0.42), {
       metros: 3.2,
-      tinte: '#cfcdc9',
+      tinte: '#ffd6e6',
     }),
   marmol: () => {
     const m = new MeshPhysicalMaterial({
-      color: '#ece9e4',
+      color: '#fff4f8',
       roughness: 0.2,
       clearcoat: 0.35,
       clearcoatRoughness: 0.12,
@@ -247,35 +245,33 @@ const CREAR: Record<ClaveMaterial, () => Material> = {
     const veteado = marmolVeteado();
     if (veteado) {
       m.map = veteado;
-      m.color.set('#d4cfc8');
+      m.color.set('#fff0f6');
     }
     return m;
   },
   travertino: () =>
-    conMapas(estandar('#d6c9b1', 0.62), {
+    conMapas(estandar('#ffe9f1', 0.6), {
       color: new URL('./texturas/marmol.webp', import.meta.url).href,
       rugosidad: new URL('./texturas/marmol-rugosidad.webp', import.meta.url).href,
       metros: 2.4,
-      tinte: '#fff8ee',
+      tinte: '#fff1f6',
     }),
   nogal: () =>
-    conMapas(estandar('#6b4630', 0.55), {
-      color: new URL('./texturas/nogal.webp', import.meta.url).href,
+    conMapas(estandar('#fff0f5', 0.5), {
       rugosidad: new URL('./texturas/nogal-rugosidad.webp', import.meta.url).href,
       metros: 1.6,
-      tinte: '#d58b5c',
+      tinte: '#ffe3ee',
     }),
   parquet: () =>
-    conMapas(estandar('#9a6e45', 0.5), {
-      color: new URL('./texturas/parquet.webp', import.meta.url).href,
+    conMapas(estandar('#ffd9e6', 0.5), {
       rugosidad: new URL('./texturas/parquet-rugosidad.webp', import.meta.url).href,
       metros: 2,
-      tinte: '#f2e2cf',
+      tinte: '#ffe6ef',
     }),
-  fieltro: () => estandar('#2e3136', 0.95),
+  fieltro: () => estandar('#c9a3e8', 0.95),
   vidrio: () =>
     new MeshPhysicalMaterial({
-      color: '#c4dadc',
+      color: '#ffd9ea',
       roughness: 0.04,
       metalness: 0,
       transparent: true,
@@ -284,27 +280,26 @@ const CREAR: Record<ClaveMaterial, () => Material> = {
       side: DoubleSide,
       envMapIntensity: 1.4,
     }),
-  acero: () => estandar('#1d1f22', 0.4, 0.8),
-  laton: () => estandar('#b08d57', 0.35, 1),
-  led: () => new MeshBasicMaterial({ color: '#ffd29a' }),
-  roca: () => estratos('#6f6a62'),
+  acero: () => estandar('#ffffff', 0.45, 0.15),
+  laton: () => estandar('#e6c56b', 0.3, 1),
+  led: () => new MeshBasicMaterial({ color: '#ffd6ea' }),
+  roca: () => estratos('#c9a0ae'),
   tierra: () => estratos('#4d3b2c'),
-  cesped: () => estandar('#66743f', 1),
+  cesped: () => estandar('#8fce7a', 1),
   deck: () =>
-    conMapas(estandar('#8f7258', 0.7), {
-      color: new URL('./texturas/nogal.webp', import.meta.url).href,
+    conMapas(estandar('#ffe1ea', 0.7), {
       metros: 1.2,
-      tinte: '#f2c79e',
+      tinte: '#ffe9f0',
     }),
   /** Cobre de la cúpula del observatorio (se ve por dentro y por fuera). */
   cobre: () => {
-    const m = estandar('#b8734a', 0.32, 1);
+    const m = estandar('#ec4a93', 0.4, 0.1);
     m.side = DoubleSide;
     return m;
   },
   /** Cuero coñac (sillones de Ventas). */
   cuero: () =>
-    conMapas(estandar('#8a4b2a', 0.6), {
+    conMapas(estandar('#ff8fb8', 0.6), {
       color: new URL('./texturas/cuero.webp', import.meta.url).href,
       metros: 0.8,
       tinte: '#ffffff',
