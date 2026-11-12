@@ -27,10 +27,6 @@ interface Props {
   onCerrar: () => void;
   /** Abre la bandeja de entregas (el trabajo real del agente). */
   onVerEntregas?: () => void;
-  /** Texto del campo impuesto desde fuera (la demo escribe sola); `undefined` = lo escribe el usuario. */
-  textoForzado?: string;
-  /** Resalta «Aprobar» (la demo lo marca antes de que el cursor haga clic). */
-  resaltarAprobar?: boolean;
 }
 
 /** Panel del agente tocado: rol, departamento, estado y tarea, y un campo para darle órdenes. */
@@ -44,11 +40,8 @@ export function PanelOrden({
   onRechazar,
   onCerrar,
   onVerEntregas,
-  textoForzado,
-  resaltarAprobar = false,
 }: Props) {
-  const [escrito, setTexto] = useState('');
-  const texto = textoForzado ?? escrito;
+  const [texto, setTexto] = useState('');
   const depto = departamentosBase.find((d) => d.id === agente.departamento);
 
   const enviar = (orden: string) => {
@@ -63,9 +56,7 @@ export function PanelOrden({
 
   return (
     <aside
-      className={
-        textoForzado === undefined ? 'hud detalle panel-orden' : 'hud detalle panel-orden en-demo'
-      }
+      className="hud detalle panel-orden"
       aria-label={`Panel de ${agente.nombre}`}
     >
       <div className="panel-orden-cabeza">
@@ -105,12 +96,7 @@ export function PanelOrden({
       {aviso && <p className="aviso-local">{aviso}</p>}
       {agente.estado === 'esperando_decision' && (
         <div className="acciones">
-          <button
-            type="button"
-            data-demo="aprobar"
-            className={resaltarAprobar ? 'btn principal resaltado' : 'btn principal'}
-            onClick={onAprobar}
-          >
+          <button type="button" className="btn principal" onClick={onAprobar}>
             Aprobar
           </button>
           <button type="button" className="btn" onClick={onRechazar}>
@@ -127,7 +113,7 @@ export function PanelOrden({
           aria-label={`Orden para ${agente.nombre}`}
           autoComplete="off"
         />
-        <button type="submit" data-demo="enviar" className="btn principal" disabled={!texto.trim()}>
+        <button type="submit" className="btn principal" disabled={!texto.trim()}>
           Enviar
         </button>
       </form>

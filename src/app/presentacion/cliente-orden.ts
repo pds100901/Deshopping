@@ -1,5 +1,4 @@
 import { requiereAprobacion as requiereAprobacionDelRol } from './aprobacion';
-import type { Estado } from './recorrido';
 
 /** Cuánto espera la respuesta del modelo antes de volver a la frase local. */
 export const TIMEOUT_MS = 17_000;
@@ -26,8 +25,6 @@ export type FetchFalso = (url: string, init?: RequestInit) => Promise<Response>;
 interface Deps {
   fetch: FetchFalso;
   signal: AbortSignal;
-  /** En la fase guiada (cursor demo) nunca se llama a la red. */
-  fase?: Estado['fase'];
 }
 
 const local = (motivo: string): ResultadoOrden => ({ texto: null, motivo });
@@ -39,9 +36,8 @@ const local = (motivo: string): ResultadoOrden => ({ texto: null, motivo });
  */
 export async function pedirRespuesta(
   params: ParamsOrden,
-  { fetch, signal, fase }: Deps,
+  { fetch, signal }: Deps,
 ): Promise<ResultadoOrden> {
-  if (fase === 'guiado') return local('guiada');
   if (signal.aborted) return local('cancelado');
 
   const interno = new AbortController();
@@ -87,7 +83,7 @@ function leer(cuerpo: unknown): ResultadoOrden {
   return { texto: respuesta, requiereAprobacion };
 }
 
-/** Identifica una petición: secuencia por agente y época global (reinicio, Aprobar, Rechazar). */
+/** Identifica una petición: secuencia por agente y época global (Aprobar, Rechazar). */
 export interface Token {
   secuencia: number;
   epoca: number;

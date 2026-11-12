@@ -70,7 +70,7 @@ export interface OficinaProps {
    * sin `prefers-reduced-motion`. Sin ella (o con 0) la cámara no se mueve sola.
    */
   derivaCamara?: number;
-  /** Nadie sale de la sala de su departamento (para recorridos narrados): sin café ni visitas fuera de ella. */
+  /** Nadie sale de la sala de su departamento: sin café ni visitas fuera de ella. */
   retenerEnSala?: boolean;
   /**
    * Entrega una vez una función que proyecta a píxeles de la escena un punto 3D (`{x, y, z}` en

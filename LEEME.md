@@ -22,15 +22,9 @@ npm run dev
 
 Abrí `http://127.0.0.1:5180` en el navegador. Si ese puerto está ocupado, Vite muestra otro en la terminal.
 
-1. Antes de empezar podés explorar: tocá agentes, dales órdenes y mové la cámara. Elegí la hora del día con **1** (atardecer), **2** (noche) o **3** (día, la inicial).
-2. Tocá **Empezar** para el recorrido guiado. La cámara entra a cada área y enfoca a cada agente por su nombre; un cursor animado abre los paneles de Vicky Vitrina, Clara Clic, Gigi Guion y Coco Caja.
-3. Con la **barra espaciadora** (o el botón de abajo a la derecha) pausás y reanudás.
-4. Al final te entrega la cámara. Con la tecla **R** volvés a empezar.
-
-El recorrido va **con subtítulos y sin narración**: el guion es nuevo y todavía no tiene voz grabada (ver
-«Ponerle voz al recorrido»). Las confirmaciones cortas de Jules al dar una orden sí suenan.
-
-Para grabar en pantalla, la tecla **H** oculta los botones y el cursor del mouse.
+La oficina es tuya desde que carga: tocá agentes, dales órdenes y mové la cámara. Elegí la hora del
+día con los botones de arriba o con las teclas **1** (atardecer), **2** (noche) o **3** (día, la inicial).
+Al dar una orden suena una confirmación corta de Jules.
 
 `http://127.0.0.1:5180/?lab` abre el laboratorio: 9, 18 o 30 agentes, vestidor y medidor de rendimiento.
 
@@ -109,8 +103,7 @@ Límites, para que no haya sorpresas:
 - **Tocar a un agente en la casa**: su panel, con «Ver sus entregas» y el campo para darle órdenes.
 - **Burbujas sobre la cabeza**: «…» trabajando, «!» con una entrega esperando aprobación.
 
-Al abrir la oficina todos están libres y sin tareas inventadas; los estados de muestra solo aparecen
-durante el recorrido guiado.
+Al abrir la oficina todos están libres y sin tareas inventadas.
 
 ## Controles
 
@@ -177,21 +170,6 @@ Lo que no hace: no recuerda nada entre una orden y otra, y no se conecta a Whats
 | Nombres y colores de las áreas | `src/oficina/render/layout.ts` y `src/oficina/mansion/plano.ts` |
 | Ropa de cada rol | `src/oficina/vestuario/roles.ts` |
 | Colores y fuentes de los paneles | `src/app/estilos.css` (bloque `:root`) |
-| Guion del recorrido | `public/presentacion/guion-dueto.txt` |
-| Qué hace la cámara en cada frase | `src/app/presentacion/guion.ts` |
-
-Si cambiás el guion, corré `node herramientas/generar-recorrido.mjs` para rehacer los tiempos. Las frases
-que `guion.ts` usa como ancla (por ejemplo «Vicky» o «si la toco») tienen que seguir en el texto.
-
-## Ponerle voz al recorrido
-
-El recorrido se mueve con el reloj de `public/presentacion/dueto-recorrido.mp3` y con los tiempos de
-`dueto-recorrido.alineacion.json`. Hoy la pista es silencio y los tiempos son a ritmo de lectura,
-generados por `herramientas/generar-recorrido.mjs` (necesita `ffmpeg`).
-
-Para narrarlo: grabá el guion completo en un solo audio (Pau y Jules), guardalo como
-`dueto-recorrido.mp3` y reemplazá el JSON por una alineación real con el formato «with-timestamps»
-de ElevenLabs.
 
 ## Créditos y licencias
 

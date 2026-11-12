@@ -6,7 +6,7 @@ export type Momento = 'atardecer' | 'noche' | 'dia';
 export interface InfoMomento {
   id: Momento;
   nombre: string;
-  /** Tecla que lo elige en la fase de espera. */
+  /** Tecla que lo elige. */
   tecla: string;
   /** Hora de America/Santiago (0–24, decimal) que se pasa a `horaChile` de `<Oficina>`. */
   hora: number;

@@ -133,58 +133,44 @@ export function armarRoster(cantidad: number): AgenteOficina[] {
   return agentes;
 }
 
-/** Departamento, rol, estado y actividad de cada agente de la oficina (los 19 del recorrido). */
-const AGENTES_RECORRIDO: [number, string, EstadoAgente, Actividad?][] = [
-  [0, 'Catálogo', 'trabajando', 'escribiendo'],
-  [0, 'Bodega', 'trabajando', 'leyendo'],
-  [0, 'Regalos', 'libre'],
-  [0, 'Publicación', 'esperando_decision', 'pensando'],
-  [1, 'Ventas', 'esperando_decision', 'hablando'],
-  [1, 'Pedidos', 'trabajando', 'leyendo'],
-  [1, 'Cotizaciones', 'trabajando', 'escribiendo'],
-  [2, 'Guiones', 'trabajando', 'escribiendo'],
-  [2, 'Diseño y contenido', 'trabajando', 'pensando'],
-  [2, 'Video', 'libre'],
-  [3, 'Cobros', 'trabajando', 'leyendo'],
-  [3, 'Reportes y estadísticas', 'trabajando', 'pensando'],
-  [3, 'Promociones', 'libre'],
-  [4, 'Entregas', 'trabajando', 'hablando'],
-  [4, 'Agenda', 'trabajando', 'leyendo'],
-  [4, 'Viajes', 'libre'],
-  [5, 'Compras', 'trabajando', 'pensando'],
-  [5, 'Carritos', 'trabajando', 'leyendo'],
-  [5, 'Ofertas', 'libre'],
+/** Departamento y rol de cada uno de los 19 agentes de la oficina. */
+const AGENTES: [number, string][] = [
+  [0, 'Catálogo'],
+  [0, 'Bodega'],
+  [0, 'Regalos'],
+  [0, 'Publicación'],
+  [1, 'Ventas'],
+  [1, 'Pedidos'],
+  [1, 'Cotizaciones'],
+  [2, 'Guiones'],
+  [2, 'Diseño y contenido'],
+  [2, 'Video'],
+  [3, 'Cobros'],
+  [3, 'Reportes y estadísticas'],
+  [3, 'Promociones'],
+  [4, 'Entregas'],
+  [4, 'Agenda'],
+  [4, 'Viajes'],
+  [5, 'Compras'],
+  [5, 'Carritos'],
+  [5, 'Ofertas'],
 ];
-
-/**
- * Roster de la oficina: un agente por rol, con ids `${departamento}:${rol}`, su nombre propio y
- * la tarea de su rol. No cambia el roster del laboratorio.
- */
-export function armarRosterRecorrido(): AgenteOficina[] {
-  return AGENTES_RECORRIDO.map(([sala, rol, estado, actividad]) => ({
-    id: `${sala}:${rol}`,
-    nombre: personajeDe(rol)?.nombre ?? rol,
-    rol,
-    departamento: departamentosBase[sala]?.id ?? '',
-    estado,
-    actividad,
-    tarea: TAREAS[rol] ?? 'Trabajando en su tarea.',
-  }));
-}
 
 /** Lo que dice el panel de un agente que todavía no tiene encargos. */
 export const SIN_ENCARGOS = 'Sin encargos por ahora. Dale una orden y su trabajo llega a «Entregas».';
 
 /**
- * Roster real de la oficina: los mismos 19, todos libres y sin tareas inventadas. Lo que hagan
- * después sale de las órdenes que reciben y de sus entregas. El recorrido guiado usa
- * `armarRosterRecorrido`, con estados de muestra.
+ * Roster real de la oficina: un agente por rol, con ids `${departamento}:${rol}` y su nombre
+ * propio, todos libres y sin tareas inventadas. Lo que hagan después sale de las órdenes que
+ * reciben y de sus entregas. No cambia el roster del laboratorio.
  */
 export function armarRosterReal(): AgenteOficina[] {
-  return armarRosterRecorrido().map((a) => ({
-    ...a,
+  return AGENTES.map(([sala, rol]) => ({
+    id: `${sala}:${rol}`,
+    nombre: personajeDe(rol)?.nombre ?? rol,
+    rol,
+    departamento: departamentosBase[sala]?.id ?? '',
     estado: 'libre',
-    actividad: undefined,
     tarea: SIN_ENCARGOS,
   }));
 }
